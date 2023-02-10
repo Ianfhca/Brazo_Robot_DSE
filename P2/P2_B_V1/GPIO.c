@@ -16,4 +16,12 @@ void inic_leds()
   Nop();
   LATA=LATA & 0xff00; 	// Apagar los leds
 }
+
+void inic_pulsadores(){
+    
+  AD1PCFGH = 0xffff;
+  
+  TRISDbits.TRISD13 = 1; // Pulsador S4
+  TRISDbits.TRISD7 = 1; // Pulsador S6
+}
       

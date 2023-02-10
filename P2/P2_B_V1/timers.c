@@ -15,6 +15,8 @@ void inic_Timer7 ()
     T7CONbits.TGATE = 0;	// Deshabilitar el modo Gate
     
     T7CONbits.TON = 1;	// puesta en marcha del timer
+    
+    IEC3bits.T7IE = 1;
 }	
 
 unsigned int mili, deci, seg, min;
@@ -28,19 +30,10 @@ void inic_crono()
     min = 0;
 }
 
-void delay_10ms()	// detecta que el timer ha llegado a 10 milisegundos
-{
-	//completad codigo
-    while (!IFS3bits.T7IF);	// encuesta continua    
-    // ACORDARSE )DE PONER EL IF A 0 
-    mili += 10;
-    IFS3bits.T7IF = 0;
-}
-
-void cronometro()	
+void _ISR_NO_PSV _T7Interrupt()	
 // control del tiempo espera 10 ms y luego actualiza
 {
-    delay_10ms();	// espera a que pasen 10 milisegundos
+    mili += 10;
   // completad codigo
     if (mili == 100) {
         LATAbits.LATA2 = !LATAbits.LATA2;
@@ -56,5 +49,7 @@ void cronometro()
         seg = 0;
         min++;
     }
+    
+    IFS3bits.T7IF = 0;
 }
 
