@@ -4,11 +4,11 @@ Tool Name:
   c:\program files (x86)\microchip\xc16\v1.36\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp00004e10.00 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp00004e10.01 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp00004e10.02 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp00004e10.03 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp00004e10.04 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp00000764.00 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp00000764.01 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp00000764.02 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp00000764.03 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp00000764.04 \
   -p24HJ256GP610A \
   -o \
   dist/default/debug/P2_B_V2.X.debug.elf \
@@ -62,6 +62,22 @@ c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.
                               c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o) (__data_init_standard)
 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
                               (__crt_start_mode_normal)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                              build/default/debug/_ext/1472/timers.o (___ltsf2)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                              build/default/debug/_ext/1472/timers.o (___floatunsisf)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                              build/default/debug/_ext/1472/timers.o (___udivsi3)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                              c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(feqltle.eo) (__fcompare)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                              c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo) (___floatundisf)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                              c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo) (__fpack)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                              c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fcompare.eo) (__funpack2)
+c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                              c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo) (__funpack)
 
 
 xc16-ld 1.36 (B)
@@ -70,11 +86,11 @@ xc16-ld 1.36 (B)
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200               0x174           0x22e  (558)
-.text                        0x374                0xce           0x135  (309)
-.dinit                       0x442                 0x8             0xc  (12)
+.text                        0x200               0x252           0x37b  (891)
+.text                        0x452               0x244           0x366  (870)
+.dinit                       0x696                 0x8             0xc  (12)
 
-                 Total "program" memory used (bytes):          0x36f  (879) <1%
+                 Total "program" memory used (bytes):          0x6ed  (1773) <1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x4000]
@@ -123,31 +139,55 @@ External Symbols in Program Memory (by address):
                   0x000252                  __data_init_standard
                   0x0002c8                  __CNInterrupt
                   0x0002f8                  __T7Interrupt
-                  0x00036e                  __DefaultInterrupt
-                  0x000374                  _inic_oscilator
-                  0x0003c6                  _inic_Timer7
-                  0x0003e4                  _inic_crono
-                  0x0003f2                  _inic_leds
-                  0x000408                  _inic_pulsadores
-                  0x000414                  _main
-                  0x000436                  _inic_CN
+                  0x00030a                  __DefaultInterrupt
+                  0x000310                  ___lesf2
+                  0x000310                  ___ltsf2
+                  0x000310                  ___eqsf2
+                  0x000314                  ___floatunsisf
+                  0x000318                  ___udivsi3
+                  0x000338                  __fcompare
+                  0x00036e                  ___floatundisf
+                  0x0003cc                  __fpack
+                  0x000418                  __funpack2
+                  0x000428                  __funpack
+                  0x000452                  _inic_Timer7
+                  0x000470                  _inic_crono
+                  0x00047e                  _crono
+                  0x0004e8                  _delay_ms
+                  0x0005ea                  _inic_oscilator
+                  0x00063c                  _main
+                  0x000668                  _inic_leds
+                  0x00067e                  _inic_pulsadores
+                  0x00068a                  _inic_CN
 
 External Symbols in Program Memory (by name):
 
                   0x0002c8                  __CNInterrupt
-                  0x00036e                  __DefaultInterrupt
+                  0x00030a                  __DefaultInterrupt
                   0x0002f8                  __T7Interrupt
+                  0x000310                  ___eqsf2
+                  0x00036e                  ___floatundisf
+                  0x000314                  ___floatunsisf
+                  0x000310                  ___lesf2
+                  0x000310                  ___ltsf2
+                  0x000318                  ___udivsi3
                   0x000252                  __data_init
                   0x000252                  __data_init_standard
+                  0x000338                  __fcompare
+                  0x0003cc                  __fpack
+                  0x000428                  __funpack
+                  0x000418                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x000436                  _inic_CN
-                  0x0003c6                  _inic_Timer7
-                  0x0003e4                  _inic_crono
-                  0x0003f2                  _inic_leds
-                  0x000374                  _inic_oscilator
-                  0x000408                  _inic_pulsadores
-                  0x000414                  _main
+                  0x00047e                  _crono
+                  0x0004e8                  _delay_ms
+                  0x00068a                  _inic_CN
+                  0x000452                  _inic_Timer7
+                  0x000470                  _inic_crono
+                  0x000668                  _inic_leds
+                  0x0005ea                  _inic_oscilator
+                  0x00067e                  _inic_pulsadores
+                  0x00063c                  _main
 
 Memory Configuration
 
@@ -237,7 +277,7 @@ LOAD c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200        0x174
+.text             0x000200        0x252
  *(.init)
  .init            0x000200         0x4c c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
                   0x000200                  __resetPRI
@@ -251,18 +291,40 @@ LOAD c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libfx-elf.a
  *(.isr*)
  .isr.text        0x0002c8         0x30 build/default/debug/_ext/1472/CN.o
                   0x0002c8                  __CNInterrupt
- .isr.text        0x0002f8         0x76 build/default/debug/_ext/1472/timers.o
+ .isr.text        0x0002f8         0x12 build/default/debug/_ext/1472/timers.o
                   0x0002f8                  __T7Interrupt
- .isr             0x00036e          0x4 default_isr
-                  0x00036e                  __DefaultInterrupt
+ .isr             0x00030a          0x4 default_isr
+                  0x00030a                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x000372          0x2 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
-                  0x000372                  __crt_start_mode
-                  0x000372                  __crt_start_mode_normal
+                  0x00030e          0x2 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt_start_mode_normal.Leo)
+                  0x00030e                  __crt_start_mode
+                  0x00030e                  __crt_start_mode_normal
+ .libm.eqsf2      0x000310          0x4 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                  0x000310                  ___eqsf2
+                  0x000310                  ___ltsf2
+                  0x000310                  ___lesf2
+ .libm.floatunsisf
+                  0x000314          0x4 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+                  0x000314                  ___floatunsisf
+ .libm.udivsi3    0x000318         0x20 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x000318                  ___udivsi3
+ .libm.fcompare
+                  0x000338         0x36 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x000338                  __fcompare
+ .libm.floatundisf
+                  0x00036e         0x5e c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+                  0x00036e                  ___floatundisf
+ .libm.fpack      0x0003cc         0x4c c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x0003cc                  __fpack
+ .libm.funpack2
+                  0x000418         0x10 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000418                  __funpack2
+ .libm.funpack    0x000428         0x2a c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000428                  __funpack
 
 usercode
  *(usercode)
@@ -306,46 +368,46 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x1d18
+.debug_info       0x000000       0x1d35
  *(.debug_info)
  .debug_info      0x000000        0x88a build/default/debug/_ext/1472/CN.o
  .debug_info      0x00088a        0x357 build/default/debug/_ext/1472/GPIO.o
- .debug_info      0x000be1        0x460 build/default/debug/_ext/1472/main_P2_B_v1.o
- .debug_info      0x001041        0x615 build/default/debug/_ext/1472/oscilator.o
- .debug_info      0x001656        0x6c2 build/default/debug/_ext/1472/timers.o
+ .debug_info      0x000be1        0x2ad build/default/debug/_ext/1472/main_P2_B_v1.o
+ .debug_info      0x000e8e        0x615 build/default/debug/_ext/1472/oscilator.o
+ .debug_info      0x0014a3        0x892 build/default/debug/_ext/1472/timers.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x3db
+.debug_abbrev     0x000000        0x3e7
  *(.debug_abbrev)
  .debug_abbrev    0x000000         0xe7 build/default/debug/_ext/1472/CN.o
  .debug_abbrev    0x0000e7         0x99 build/default/debug/_ext/1472/GPIO.o
- .debug_abbrev    0x000180         0xb3 build/default/debug/_ext/1472/main_P2_B_v1.o
- .debug_abbrev    0x000233         0xc3 build/default/debug/_ext/1472/oscilator.o
- .debug_abbrev    0x0002f6         0xe5 build/default/debug/_ext/1472/timers.o
+ .debug_abbrev    0x000180         0x8a build/default/debug/_ext/1472/main_P2_B_v1.o
+ .debug_abbrev    0x00020a         0xc3 build/default/debug/_ext/1472/oscilator.o
+ .debug_abbrev    0x0002cd        0x11a build/default/debug/_ext/1472/timers.o
 
-.debug_line       0x000000        0x4fe
+.debug_line       0x000000        0x51f
  *(.debug_line)
  .debug_line      0x000000        0x100 build/default/debug/_ext/1472/CN.o
  .debug_line      0x000100         0xf3 build/default/debug/_ext/1472/GPIO.o
- .debug_line      0x0001f3         0xfc build/default/debug/_ext/1472/main_P2_B_v1.o
- .debug_line      0x0002ef         0xf8 build/default/debug/_ext/1472/oscilator.o
- .debug_line      0x0003e7        0x117 build/default/debug/_ext/1472/timers.o
+ .debug_line      0x0001f3         0xfb build/default/debug/_ext/1472/main_P2_B_v1.o
+ .debug_line      0x0002ee         0xf8 build/default/debug/_ext/1472/oscilator.o
+ .debug_line      0x0003e6        0x139 build/default/debug/_ext/1472/timers.o
 
-.debug_frame      0x000000        0x170
+.debug_frame      0x000000        0x1ae
  *(.debug_frame)
  .debug_frame     0x000000         0x54 build/default/debug/_ext/1472/CN.o
  .debug_frame     0x000054         0x4c build/default/debug/_ext/1472/GPIO.o
  .debug_frame     0x0000a0         0x30 build/default/debug/_ext/1472/main_P2_B_v1.o
  .debug_frame     0x0000d0         0x30 build/default/debug/_ext/1472/oscilator.o
- .debug_frame     0x000100         0x70 build/default/debug/_ext/1472/timers.o
+ .debug_frame     0x000100         0xae build/default/debug/_ext/1472/timers.o
 
 .debug_str        0x000000         0x99
  *(.debug_str)
  .debug_str       0x000000         0x2f build/default/debug/_ext/1472/CN.o
  .debug_str       0x00002f         0x13 build/default/debug/_ext/1472/GPIO.o
- .debug_str       0x000042         0x13 build/default/debug/_ext/1472/main_P2_B_v1.o
- .debug_str       0x000055         0x1f build/default/debug/_ext/1472/oscilator.o
- .debug_str       0x000074         0x25 build/default/debug/_ext/1472/timers.o
+ .debug_str       0x000042          0x9 build/default/debug/_ext/1472/main_P2_B_v1.o
+ .debug_str       0x00004b         0x1f build/default/debug/_ext/1472/oscilator.o
+ .debug_str       0x00006a         0x2f build/default/debug/_ext/1472/timers.o
 
 .debug_loc
  *(.debug_loc)
@@ -354,7 +416,7 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x107
+                  0x000000        0x11e
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x2f build/default/debug/_ext/1472/CN.o
@@ -365,7 +427,7 @@ __FUID3
  .debug_pubnames
                   0x00007e         0x25 build/default/debug/_ext/1472/oscilator.o
  .debug_pubnames
-                  0x0000a3         0x64 build/default/debug/_ext/1472/timers.o
+                  0x0000a3         0x7b build/default/debug/_ext/1472/timers.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1551,14 +1613,14 @@ LOAD data_init
  .debug_pubtypes
                   0x00012c         0x3e build/default/debug/_ext/1472/GPIO.o
  .debug_pubtypes
-                  0x00016a         0x5b build/default/debug/_ext/1472/main_P2_B_v1.o
+                  0x00016a         0x3c build/default/debug/_ext/1472/main_P2_B_v1.o
  .debug_pubtypes
-                  0x0001c5         0x7e build/default/debug/_ext/1472/oscilator.o
+                  0x0001a6         0x7e build/default/debug/_ext/1472/oscilator.o
  .debug_pubtypes
-                  0x000243         0x95 build/default/debug/_ext/1472/timers.o
+                  0x000224         0xb4 build/default/debug/_ext/1472/timers.o
 
 __c30_signature
-                  0x0002d8         0x2a
+                  0x0002d8         0x5a
  __c30_signature
                   0x0002d8          0x6 build/default/debug/_ext/1472/CN.o
  __c30_signature
@@ -1573,6 +1635,22 @@ __c30_signature
                   0x0002f6          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(crt0_standard.o)
  __c30_signature
                   0x0002fc          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\liblega-pic30-elf.a(data_init_standard.o)
+ __c30_signature
+                  0x000302          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+ __c30_signature
+                  0x000308          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatunsisf.eo)
+ __c30_signature
+                  0x00030e          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+ __c30_signature
+                  0x000314          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+ __c30_signature
+                  0x00031a          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(floatundisf.eo)
+ __c30_signature
+                  0x000320          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(fpack.eo)
+ __c30_signature
+                  0x000326          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+ __c30_signature
+                  0x00032c          0x6 c:/program files (x86)/microchip/xc16/v1.36/bin/bin/../../lib\libm-elf.a(funpack.eo)
 
 .nbss               0x0850          0x8
  .nbss              0x0850          0x8 build/default/debug/_ext/1472/timers.o
@@ -1601,19 +1679,21 @@ __c30_signature
  .ivt._T7Interrupt
                   0x000074          0x2 build/default/debug/_ext/1472/timers.o
 
-.text             0x000374         0xce
- .text            0x000374         0x52 build/default/debug/_ext/1472/oscilator.o
-                  0x000374                  _inic_oscilator
- .text            0x0003c6         0x2c build/default/debug/_ext/1472/timers.o
-                  0x0003c6                  _inic_Timer7
-                  0x0003e4                  _inic_crono
- .text            0x0003f2         0x22 build/default/debug/_ext/1472/GPIO.o
-                  0x0003f2                  _inic_leds
-                  0x000408                  _inic_pulsadores
- .text            0x000414         0x22 build/default/debug/_ext/1472/main_P2_B_v1.o
-                  0x000414                  _main
- .text            0x000436          0xc build/default/debug/_ext/1472/CN.o
-                  0x000436                  _inic_CN
+.text             0x000452        0x244
+ .text            0x000452        0x198 build/default/debug/_ext/1472/timers.o
+                  0x000452                  _inic_Timer7
+                  0x000470                  _inic_crono
+                  0x00047e                  _crono
+                  0x0004e8                  _delay_ms
+ .text            0x0005ea         0x52 build/default/debug/_ext/1472/oscilator.o
+                  0x0005ea                  _inic_oscilator
+ .text            0x00063c         0x2c build/default/debug/_ext/1472/main_P2_B_v1.o
+                  0x00063c                  _main
+ .text            0x000668         0x22 build/default/debug/_ext/1472/GPIO.o
+                  0x000668                  _inic_leds
+                  0x00067e                  _inic_pulsadores
+ .text            0x00068a          0xc build/default/debug/_ext/1472/CN.o
+                  0x00068a                  _inic_CN
 
-.dinit            0x000442          0x8
- .dinit           0x000442          0x8 data_init
+.dinit            0x000696          0x8
+ .dinit           0x000696          0x8 data_init

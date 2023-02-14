@@ -3,4 +3,5 @@
 // que se usan en otros modulos
 
 void inic_leds();
+void inic_pulsadores();
 

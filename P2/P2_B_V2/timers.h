@@ -4,3 +4,4 @@
 void inic_Timer7 ();
 void cronometro();
 void inic_crono();
+void delay_ms(int milisegundos);

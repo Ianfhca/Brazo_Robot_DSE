@@ -26,21 +26,16 @@ int main()
     
     inic_pulsadores(); //Inicializacion de pulsadores
 	
-    while(PORTDbits.RD7){ //Esperar hasta pulsar S6
-        
-    }
     
-	inic_crono();	//Inicializacion variables cronometro.
+	//inic_crono();	//Inicializacion variables cronometro.
 
-	inic_Timer7();	// Inicializacion T7 con un periodo de 10 milisegundos.
+	//inic_Timer7();	// Inicializacion T7 con un periodo de 10 milisegundos.
     
-    inic_CN();
-    
-    int stop = 0;
-    LATAbits.LATA5 = 0;
+    //inic_CN();
     
 	while(1) {
-        
+        delay_ms(419); // 419 son los milisegundos máximos que se pueden contar
+        LATAbits.LATA5 = !LATAbits.LATA5;
 	}
 	return (0);
 }
