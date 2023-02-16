@@ -22,6 +22,16 @@ void lcd_cmd (char cmd)        // subroutine for lcd commands
   DATA |= cmd;        // copiar a esos pines el parametro cmd
   E = 1;              // E=1. Debe permanecer activado al menos 230 ns. 
 // Completad
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
   E = 0;		// desactivar E
   RW = 1;		// desactivar escritura
 }
@@ -35,6 +45,16 @@ void lcd_data (char data)      // subroutine for lcd data
   DATA |= data;      	// copiar a esos pines el parametro data
   E = 1;             	// E=1. Debe permanecer activado al menos 230 ns.
 // Completad
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
+  Nop();
   E = 0;             	// desactivar E
   RS = 0;            	// desactivar RS
   RW = 1;		// desactivar escritura

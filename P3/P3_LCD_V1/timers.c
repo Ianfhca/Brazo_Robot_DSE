@@ -60,9 +60,9 @@ void _ISR_NO_PSV _T7Interrupt()
 void Delay_ms(int milisegundos) 
 {
     TMR9 = 0 ; 	// Inicializar el registro de cuenta
-    unsigned long ciclos = 40000 * milisegundos;
+    unsigned long ciclos = (unsigned long)40000 * milisegundos;
     unsigned long max_ciclos = 65536;
-    float prescaler = (float)(ciclos/max_ciclos);
+    unsigned long prescaler = ciclos/max_ciclos;
     if (prescaler < 1) {
         PR9 =  ciclos;	// Periodo del timer 40000 * milisegundos
         T9CONbits.TCKPS = 0;	// escala del prescaler 1:1
@@ -79,22 +79,23 @@ void Delay_ms(int milisegundos)
     T9CONbits.TCS = 0;	// reloj interno
     T9CONbits.TGATE = 0;	// Deshabilitar el modo Gate
     
-    T9CONbits.TON = 1;	// puesta en marcha del timer
-    
     IFS3bits.T9IF = 0;
+    
+    T9CONbits.TON = 1;	// puesta en marcha del timer    
     
     while (!IFS3bits.T9IF) { // esperar hasta que cuente los milisegundos
         // se activa IFS3bits.T9IF = 1;
     }
     IFS3bits.T9IF = 0;
+    T9CONbits.TON = 0;
 }
 
 void Delay_us(int microsegundos) 
 {
     TMR9 = 0 ; 	// Inicializar el registro de cuenta
-    unsigned long ciclos = 40 * microsegundos;
+    unsigned long ciclos = (unsigned long)40 * microsegundos;
     unsigned long max_ciclos = 65536;
-    float prescaler = (float)(ciclos/max_ciclos);
+    unsigned long prescaler = ciclos/max_ciclos;
     if (prescaler < 1) {
         PR9 =  ciclos;	// Periodo del timer 40000 * milisegundos
         T9CONbits.TCKPS = 0;	// escala del prescaler 1:1
@@ -111,12 +112,13 @@ void Delay_us(int microsegundos)
     T9CONbits.TCS = 0;	// reloj interno
     T9CONbits.TGATE = 0;	// Deshabilitar el modo Gate
     
-    T9CONbits.TON = 1;	// puesta en marcha del timer
-    
     IFS3bits.T9IF = 0;
+    
+    T9CONbits.TON = 1;	// puesta en marcha del timer
     
     while (!IFS3bits.T9IF) { // esperar hasta que cuente los milisegundos
         // se activa IFS3bits.T9IF = 1;
     }
     IFS3bits.T9IF = 0;
+    T9CONbits.TON = 0;
 }
