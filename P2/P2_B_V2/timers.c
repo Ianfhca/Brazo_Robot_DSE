@@ -88,3 +88,35 @@ void delay_ms(int milisegundos)
     }
     IFS3bits.T9IF = 0;
 }
+
+void delay_us(int microsegundos) 
+{
+    TMR9 = 0 ; 	// Inicializar el registro de cuenta
+    unsigned long ciclos = 40 * microsegundos;
+    unsigned long max_ciclos = 65536;
+    float prescaler = (float)(ciclos/max_ciclos);
+    if (prescaler < 1) {
+        PR9 =  ciclos;	// Periodo del timer 40000 * milisegundos
+        T9CONbits.TCKPS = 0;	// escala del prescaler 1:1
+    } else if (prescaler < 8) {
+        PR9 =  ciclos/8;	// Periodo del timer 40000 * milisegundos / 8
+        T9CONbits.TCKPS = 1;	// escala del prescaler 1:8
+    } else if (prescaler < 64) {
+        PR9 =  ciclos/64;	// Periodo del timer 40000 * milisegundos / 64
+        T9CONbits.TCKPS = 2;	// escala del prescaler 1:64
+    } else if (prescaler < 256) {
+        PR9 =  ciclos/256;	// Periodo del timer 40000 * milisegundos / 256
+        T9CONbits.TCKPS = 3;	// escala del prescaler 1:256
+    }
+    T9CONbits.TCS = 0;	// reloj interno
+    T9CONbits.TGATE = 0;	// Deshabilitar el modo Gate
+    
+    T9CONbits.TON = 1;	// puesta en marcha del timer
+    
+    IFS3bits.T9IF = 0;
+    
+    while (!IFS3bits.T9IF) { // esperar hasta que cuente los milisegundos
+        // se activa IFS3bits.T9IF = 1;
+    }
+    IFS3bits.T9IF = 0;
+}
