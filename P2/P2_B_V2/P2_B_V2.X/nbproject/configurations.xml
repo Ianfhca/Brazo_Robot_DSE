@@ -18,9 +18,9 @@
                    projectFiles="true">
       <itemPath>../CN.c</itemPath>
       <itemPath>../GPIO.c</itemPath>
-      <itemPath>../main_P2_B_v1.c</itemPath>
       <itemPath>../oscilator.c</itemPath>
       <itemPath>../timers.c</itemPath>
+      <itemPath>../main_P2_B_V2.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

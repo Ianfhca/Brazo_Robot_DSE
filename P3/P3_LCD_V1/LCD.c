@@ -41,7 +41,7 @@ void lcd_data (char data)      // subroutine for lcd data
 }
 
 
-void Init_LCD ()             // initialize LCD display
+void inic_LCD ()             // initialize LCD display
 {
   // 15mS delay after Vdd reaches nnVdc before proceeding 
   // with LCD initialization
@@ -66,13 +66,13 @@ void Init_LCD ()             // initialize LCD display
   lcd_cmd (0x38);
   Delay_us (100);       // 100 us delay
   lcd_cmd (0x38);
-  Delay_us (xx);      // ???? delay (mirar tabla en los apuntes)
+  Delay_us (40);      // 40us delay (mirar tabla en los apuntes)
   lcd_cmd (0x38);  
-  Delay_us (xx);      // ???? delay (mirar tabla en los apuntes)
+  Delay_us (40);      // 40us delay (mirar tabla en los apuntes)
   lcd_cmd (0x0C);       // Display on/off control, cursor blink off (0x0C)
-  Delay_us (xx);      // ???? delay (mirar tabla en los apuntes)
+  Delay_us (40);      // 40us delay (mirar tabla en los apuntes)
   lcd_cmd (0x06);	// Entry mode set (0x06)
-  Delay_us (xx);      // ???? delay (mirar tabla en los apuntes)
+  Delay_us (40);      // 40us delay (mirar tabla en los apuntes)
 }
 
 
@@ -81,7 +81,7 @@ void puts_lcd (unsigned char *data, unsigned char count)
   while (count)
 	{
 	 lcd_data(*data++);
-         Delay_us (xx);	// ???? delay (mirar tabla en los apuntes)
+         Delay_us (40);	// 40us delay (mirar tabla en los apuntes)
 	 count--;
 	}	
 }
@@ -89,11 +89,11 @@ void puts_lcd (unsigned char *data, unsigned char count)
 void line_1()
 {
     lcd_cmd(0x80);  	// Set DDRAM address (@0)
-    Delay_us (xx); 	// ???? delay (mirar tabla en los apuntes)
+    Delay_us (40); 	// 40us delay (mirar tabla en los apuntes)
 }
 
 void line_2()
 {
     lcd_cmd(0xC0);  	// Set DDRAM address (@40)
-    Delay_us (xx); 	// ???? delay (mirar tabla en los apuntes)
+    Delay_us (40); 	// 40us delay (mirar tabla en los apuntes)
 }
