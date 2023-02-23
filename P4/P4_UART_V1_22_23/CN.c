@@ -21,23 +21,18 @@ void inic_CN()
 	IFS1bits.CNIF = 0;      // Puesta a 0 del flag IF del modulo
 }
 
-
 // RUTINA DE ATENCION A LA INTERRUPCION DE CN
 //==============================
 void _ISR_NO_PSV _CNInterrupt()
 {
-		if (!PORTDbits.RD6) //S3     
-			{
-				T7CONbits.TON = !T7CONbits.TON;
-                //IEC1bits.CNIE = 0;
-			}
-       
-        if (!PORTDbits.RD7) //S6     
-			{
-                inic_crono();
-				T7CONbits.TON = 0;
-                //IEC1bits.CNIE = 0;
-			}
-		
+    if (!PORTDbits.RD6) { // S3 Para el cronómetro y lo pone en marcha
+        T7CONbits.TON = !T7CONbits.TON;
+    }
+
+    if (!PORTDbits.RD7) { // S6 Resetea el cronómetro
+        inic_crono();
+        T7CONbits.TON = 0;
+    }
+
 	IFS1bits.CNIF = 0;		
 }

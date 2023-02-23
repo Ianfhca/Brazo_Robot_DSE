@@ -103,7 +103,7 @@ void _ISR_NO_PSV _T5Interrupt()
         case 1:
             lcd_data(Ventana_LCD[0][i]);
             i++;
-            if (i == 15) 
+            if (i == 16) 
             estado=2;
             break;
             
@@ -116,7 +116,7 @@ void _ISR_NO_PSV _T5Interrupt()
         case 3:
             lcd_data(Ventana_LCD[1][i]);
             i++;
-            if (i == 15)  
+            if (i == 16)  
             estado = 0;
             break;
                     

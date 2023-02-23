@@ -1,9 +1,9 @@
 
 // Definiciones ligadas a la velocidad de transmision de UART2
 
-#define Fosc xx        		// Frecuencia de reloj de la CPU (oscillator)
+#define Fosc 80000000    // Frecuencia de reloj de la CPU (oscillator)
 #define Fcy	 Fosc/2		// Velocidad de ejecucion de las instrucciones
-#define BAUDRATE2 xx  		// Velocidad de transmision de UART2 (baudios)
+#define BAUDRATE2 9600  // Velocidad de transmision de UART2 (baudios)
 #define T_1BIT_US (1000000/BAUDRATE2)+1 // Duracion de 1 bit 
 
 #define BAUD_RATEREG_2_BRGH1 ((Fcy/BAUDRATE2)/4)-1	// valor U2BRG si BRGH=1
@@ -14,8 +14,8 @@
 #define clrscr "\x1b[2J" //4 character: \x1b, [, 2, J
 #define home "\x1b[H"    //3 character: \x1b, [, H
 
-#define CR 0x0D		// carriage return
-#define LF 0x0A		// line feed
+#define CR 0x0D		// Carriage return
+#define LF 0x0A		// Line feed
 
 
 
