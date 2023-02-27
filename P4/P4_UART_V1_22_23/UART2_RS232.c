@@ -33,9 +33,9 @@ void inic_UART2 ()
 
      // inicializacion de los bits IE e IF relacionados (IP si se quiere modificar)
 	IFS1bits.U2RXIF = 0;
-     	IFS1bits.U2TXIF = 0;
+    IFS1bits.U2TXIF = 0;
 	IEC1bits.U2RXIE = 1;
-     	IEC1bits.U2TXIE = 0;
+    IEC1bits.U2TXIE = 1;
 
      	//IPC7bits.U2RXIP=xx;
 	//IPC7bits.U2TXIP=xx;
@@ -56,10 +56,65 @@ void inic_UART2 ()
 void _ISR_NO_PSV _U2RXInterrupt() {
     char c = U2RXREG;
     if (c == 'p' || c == 'P') {
-        LATAbits.LATA6 = !LATAbits.LATA6;
+        T7CONbits.TON = 0;
     }
-    Ventana_LCD[1][0] = c;
+    else if(c == 'i' || c=='I'){
+        inic_crono();
+    }
+    else if(c=='c' || c=='C'){
+        T7CONbits.TON = 1;
+    }
+    //Ventana_LCD[1][0] = c;
     Ventana_LCD[1][15] = c;
     // if (U2RXREG == )
     IFS1bits.U2RXIF = 0;
+}
+
+void _ISR_NO_PSV _U2TXInterrupt() {
+    static int estado_uart = 0, i = 0;
+    // Maquina de Estados:
+    switch(estado_uart){
+        case 0:
+            //U2TXREG = clrscr;
+            U2TXREG = home[i];
+            i++;
+            if (i==3){
+                estado_uart=1;
+                i=0;
+            }
+                
+        break;
+        
+        case 1:
+            U2TXREG = Ventana_LCD[0][i];
+            i++;
+            if (i == 16) {
+                estado_uart=2;
+            i=0;
+            }
+                
+            break;
+            
+        case 2:
+            U2TXREG = LF;
+            estado_uart = 3;
+            break;
+            
+        case 3:
+            U2TXREG = CR;
+            estado_uart = 4;
+            break;
+            
+        case 4:
+            U2TXREG = Ventana_LCD[1][i];
+            i++;
+            if (i == 16)  {
+                estado_uart = 0;
+                i=0;
+            }
+                
+            break;
+    }
+    
+    IFS1bits.U2TXIF = 0;
 }

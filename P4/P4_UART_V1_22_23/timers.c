@@ -3,6 +3,7 @@
 #include "LCD.h"
 #include "memoria.h"
 #include "utilidades.h"
+#include "UART2_RS232.h"
 
 void inic_Timer7 ()
 {
@@ -87,37 +88,36 @@ void _ISR_NO_PSV _T7Interrupt()
     IFS3bits.T7IF = 0;
 }
 
-
-int estado = 0, i = 0;
 // control del tiempo espera 2.5 ms y luego actualiza
 void _ISR_NO_PSV _T5Interrupt()	
 {
+    static int estado_lcd = 0, i = 0;
     // Maquina de Estados:
-    switch(estado){
+    switch(estado_lcd){
         case 0:
             i = 0;
             lcd_cmd(0x80);
-            estado=1;
+            estado_lcd=1;
         break;
         
-        case 1:
+        case 1:{}
             lcd_data(Ventana_LCD[0][i]);
             i++;
             if (i == 16) 
-            estado=2;
+            estado_lcd=2;
             break;
             
         case 2:
             i = 0;
             lcd_cmd(0xC0);
-            estado = 3;
+            estado_lcd = 3;
             break;
             
         case 3:
             lcd_data(Ventana_LCD[1][i]);
             i++;
             if (i == 16)  
-            estado = 0;
+            estado_lcd = 0;
             break;
                     
     }

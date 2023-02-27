@@ -3,4 +3,5 @@ build/default/debug/_ext/1472/timers.o:  \
 ../commons.h  \
 ../LCD.h  \
  ../memoria.h  \
-../utilidades.h 
+../utilidades.h  \
+../UART2_RS232.h 

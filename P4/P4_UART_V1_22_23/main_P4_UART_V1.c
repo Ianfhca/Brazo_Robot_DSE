@@ -70,9 +70,10 @@ int main()
     
     inic_UART2();
     
+    U2TXREG = 0;
+    
 	while(1) {
-        crono();
-        
+        crono();     
         comprobar_inic_crono();
 	}
 	return (0);
