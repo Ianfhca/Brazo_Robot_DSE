@@ -1,4 +1,3 @@
-
 // Definiciones ligadas a la velocidad de transmision de UART2
 
 #define Fosc 80000000    // Frecuencia de reloj de la CPU (oscillator)

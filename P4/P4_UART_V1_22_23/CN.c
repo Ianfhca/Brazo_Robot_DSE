@@ -1,9 +1,6 @@
 /*
  Funciones relacionadas con el modulo CN: inicializacion del modulo
  y rutina de atencion.
-
-Egileak: Izaskun
-Data: Febrero 2020
 */
 
 #include "p24HJ256GP610A.h"

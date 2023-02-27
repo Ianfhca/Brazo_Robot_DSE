@@ -16,19 +16,18 @@ Fecha:
 
 void inic_UART2 ()
 {
-	
-     // Velocidad de transmision
-     // Hay que hacer solo una de las dos asignaciones siguientes
+    // Velocidad de transmision
+    // Hay que hacer solo una de las dos asignaciones siguientes
 	U2BRG = BAUD_RATEREG_2_BRGH1;
 	// U2BRG = BAUD_RATEREG_2_BRGH0;
 
-     // U2MODE: habilitar el modulo (UARTEN), 8 bits, paridad par (PDSEL),
-     // 1 bit de stop (STSEL), BRGH ...
+    // U2MODE: habilitar el modulo (UARTEN), 8 bits, paridad par (PDSEL),
+    // 1 bit de stop (STSEL), BRGH ...
 	U2MODE = 0;
 	U2MODEbits.BRGH = 1;
 
-     // U2STA: modo de interrupcion en el envio (UTXISEL), habilitacion del
-     // envio (UTXEN), modo de interrupcion en la recepcion (URXISEL)
+    // U2STA: modo de interrupcion en el envio (UTXISEL), habilitacion del
+    // envio (UTXEN), modo de interrupcion en la recepcion (URXISEL)
 	U2STA = 0;
 
      // inicializacion de los bits IE e IF relacionados (IP si se quiere modificar)
@@ -37,7 +36,7 @@ void inic_UART2 ()
 	IEC1bits.U2RXIE = 1;
     IEC1bits.U2TXIE = 1;
 
-     	//IPC7bits.U2RXIP=xx;
+    //IPC7bits.U2RXIP=xx;
 	//IPC7bits.U2TXIP=xx;
 
      // interrupciones debidas a errores + bug
@@ -64,47 +63,38 @@ void _ISR_NO_PSV _U2RXInterrupt() {
     else if(c=='c' || c=='C'){
         T7CONbits.TON = 1;
     }
-    //Ventana_LCD[1][0] = c;
     Ventana_LCD[1][15] = c;
-    // if (U2RXREG == )
     IFS1bits.U2RXIF = 0;
 }
 
 void _ISR_NO_PSV _U2TXInterrupt() {
     static int estado_uart = 0, i = 0;
-    // Maquina de Estados:
+    // Maquina de Estados UART2:
     switch(estado_uart){
         case 0:
-            //U2TXREG = clrscr;
             U2TXREG = home[i];
             i++;
             if (i==3){
                 estado_uart=1;
                 i=0;
-            }
-                
-        break;
-        
+            }  
+            break;
         case 1:
             U2TXREG = Ventana_LCD[0][i];
             i++;
             if (i == 16) {
                 estado_uart=2;
             i=0;
-            }
-                
+            }  
             break;
-            
         case 2:
             U2TXREG = LF;
             estado_uart = 3;
             break;
-            
         case 3:
             U2TXREG = CR;
             estado_uart = 4;
             break;
-            
         case 4:
             U2TXREG = Ventana_LCD[1][i];
             i++;
@@ -112,7 +102,6 @@ void _ISR_NO_PSV _U2TXInterrupt() {
                 estado_uart = 0;
                 i=0;
             }
-                
             break;
     }
     

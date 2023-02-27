@@ -1,8 +1,3 @@
-/*
-comentarios!!!
-Autorxs y fecha!!!
-*/
-
 #include "p24HJ256GP610A.h"
 
 const unsigned char Mens_LCD_1[]={"- DSE 2021-22 --"};  //linea 1.1, 16 caracteres

@@ -1,6 +1,6 @@
 /*
  * File:   main_P3_LCD_V2.c
- * Author: Ian
+ * Authors: Luis Castillo and Ian Fernandez
  *
  * Created on 16 de febrero de 2023, 15:55
  */
@@ -68,9 +68,9 @@ int main()
     
     inic_CN(); // Inicialización de las interrupciones para los pulsadores.
     
-    inic_UART2();
+    inic_UART2(); // Inicialización del modulo UART2
     
-    U2TXREG = 0;
+    U2TXREG = 0; // Envio de bit nulo atraves del modulo UART2
     
 	while(1) {
         crono();     
