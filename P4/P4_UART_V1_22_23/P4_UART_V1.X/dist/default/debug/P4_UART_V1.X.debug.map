@@ -4,11 +4,11 @@ Tool Name:
   c:\program files (x86)\microchip\xc16\v1.36\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\ehu\\AppData\\Local\\Temp\\tmp00002238.00 \
-  -TC:\\Users\\ehu\\AppData\\Local\\Temp\\tmp00002238.01 \
-  -TC:\\Users\\ehu\\AppData\\Local\\Temp\\tmp00002238.02 \
-  -TC:\\Users\\ehu\\AppData\\Local\\Temp\\tmp00002238.03 \
-  -TC:\\Users\\ehu\\AppData\\Local\\Temp\\tmp00002238.04 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000012b0.00 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000012b0.01 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000012b0.02 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000012b0.03 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000012b0.04 \
   -p24HJ256GP610A \
   -o \
   dist/default/debug/P4_UART_V1.X.debug.elf \
@@ -380,17 +380,17 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x3e59
+.debug_info       0x000000       0x3e65
  *(.debug_info)
  .debug_info      0x000000        0x9b8 build/default/debug/_ext/1472/CN.o
  .debug_info      0x0009b8        0x36a build/default/debug/_ext/1472/GPIO.o
  .debug_info      0x000d22        0x8b4 build/default/debug/_ext/1472/LCD.o
- .debug_info      0x0015d6        0xb74 build/default/debug/_ext/1472/UART2_RS232.o
- .debug_info      0x00214a        0x279 build/default/debug/_ext/1472/memoria.o
- .debug_info      0x0023c3        0x628 build/default/debug/_ext/1472/oscilator.o
- .debug_info      0x0029eb        0xe61 build/default/debug/_ext/1472/timers.o
- .debug_info      0x00384c        0x1b0 build/default/debug/_ext/1472/utilidades.o
- .debug_info      0x0039fc        0x45d build/default/debug/_ext/1472/main_P4_UART_V1.o
+ .debug_info      0x0015d6        0xb7a build/default/debug/_ext/1472/UART2_RS232.o
+ .debug_info      0x002150        0x279 build/default/debug/_ext/1472/memoria.o
+ .debug_info      0x0023c9        0x628 build/default/debug/_ext/1472/oscilator.o
+ .debug_info      0x0029f1        0xe61 build/default/debug/_ext/1472/timers.o
+ .debug_info      0x003852        0x1b0 build/default/debug/_ext/1472/utilidades.o
+ .debug_info      0x003a02        0x463 build/default/debug/_ext/1472/main_P4_UART_V1.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x7cf
