@@ -93,25 +93,7 @@ void _ISR_NO_PSV _U2TXInterrupt() {
             i=0;
             }
                 
-            break;
-            
-        case 2:
-            U2TXREG = LF;
-            estado_uart = 3;
-            break;
-            
-        case 3:
-            U2TXREG = CR;
-            estado_uart = 4;
-            break;
-            
-        case 4:
-            U2TXREG = Ventana_LCD[1][i];
-            i++;
-            if (i == 16)  {
-                estado_uart = 0;
-                i=0;
-            }
+
                 
             break;
     }
