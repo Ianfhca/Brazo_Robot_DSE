@@ -11,7 +11,7 @@ AD1CON1 = 0;       // todos los campos a 0
 
 // Comienzo digitalizacion automatico
 // 111=Auto-convert / 010=TMR3 ADC1 y TMR5 ADC2 / 001=INT0 / 000= SAMP 
-AD1CON1bits.SSRC=xx;    		
+AD1CON1bits.SSRC = 7;    		
 
 // Muestreo simultaneo o secuencial
 //AD1CON1bits.SIMSAM = 0; 
@@ -21,27 +21,27 @@ AD1CON1bits.SSRC=xx;
 
                     
 // Inicializacion registro control AD1CON2
-AD1CON2= 0 ;  // todos los campos a 0
+AD1CON2 = 0;  // todos los campos a 0
 
 
 // Inicializacion registro control AD1CON3
-AD1CON3=0;    // todos los campos a 0
+AD1CON3 = 0;    // todos los campos a 0
 // Reloj con el que funciona el ADC:  0= reloj CPU; 1= RC erlojua 
 //AD1CON3bits.ADRC = 0;  // 
-AD1CON3bits.SAMC=xx;   // Tiempo muestreo = numero de Tad 
-AD1CON3bits.ADCS=xx;   // Relacion entre TAD y Tcy TAD = Tcy(ADCS+1)
+AD1CON3bits.SAMC = 31;   // Tiempo muestreo = numero de Tad 
+AD1CON3bits.ADCS = 3;   // Relacion entre TAD y Tcy TAD = Tcy(ADCS+1)
 
 
 // Inicializacion registro control AD1CON4
-AD1CON4=0;
+AD1CON4 = 0;
 
 
 // Inicializacion registro AD1CHS123
-AD1CHS123=0;	//seleccion del canal 1,2 eta 3
+AD1CHS123 = 0;	//seleccion del canal 1,2 eta 3
 
 
 // Inicializacion registro AD1CHS0
-AD1CHS0=0;
+AD1CHS0 = 0;
 AD1CHS0bits.CH0SA = 5; // elige la entrada analogica conectada
 
 //AD1CHS0bits.CH0SB = 0;
