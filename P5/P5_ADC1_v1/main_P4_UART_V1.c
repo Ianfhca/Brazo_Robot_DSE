@@ -16,6 +16,7 @@
 #include "memoria.h"
 #include "utilidades.h"
 #include "UART2_RS232.h"
+#include "ADC1.h"
 
 // TCKPS para el prescaler
 
@@ -72,9 +73,14 @@ int main()
     
     U2TXREG = 0; // Envio de bit nulo atraves del modulo UART2
     
+    inic_ADC1();
+    comienzo_muestreo();
+    
 	while(1) {
         crono();     
         comprobar_inic_crono();
+        recoger_valorADC1();
 	}
+    
 	return (0);
 }

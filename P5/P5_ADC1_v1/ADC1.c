@@ -1,5 +1,9 @@
 // Funciones para el modulo ADC1
 #include <p24HJ256GP610A.h>
+#include "LCD.h"
+#include "memoria.h"
+#include "utilidades.h"
+#include "ADC1.h"
 
 void inic_ADC1 (void)
 {
@@ -76,11 +80,29 @@ void comienzo_muestreo ()
     AD1CON1bits.SAMP = 1; 
 }
 
-
 // Funcion que recoge el valor del convertidor por encuesta
-void recoger_valorADC1 () 
-{
-		//A completar!!!!
+void recoger_valorADC1 ()
+{   
+    static unsigned int valor_pot; //Variable que almacena el valor del potenciomentro (en interrupcion sera global)
+    static unsigned int valor_temp;
+    if (AD1CON1bits.DONE){
+         
+        switch(AD1CHS0bits.CH0SA) {
+            case 4:
+                valor_temp = ADC1BUF0;
+                conversion_adc(&Ventana_LCD[0][12],valor_temp);
+                AD1CHS0bits.CH0SA = 5; // elige el potenciometro
+                break;
+            
+            case 5:
+                valor_pot = ADC1BUF0;
+                conversion_adc(&Ventana_LCD[0][3],valor_pot);
+                AD1CHS0bits.CH0SA = 4; // elige el sensor de temperatura
+                break;
+        }
+         
+         comienzo_muestreo();
+    }
 }
 
 
