@@ -76,10 +76,14 @@ int main()
     inic_ADC1();
     comienzo_muestreo();
     
+    
 	while(1) {
         crono();     
         comprobar_inic_crono();
-        recoger_valorADC1();
+        if (&flag_muestras == 1) {
+            // Funcion que haga la media de las 16 muestras tomadas
+        }
+        // recoger_valorADC1();
 	}
     
 	return (0);

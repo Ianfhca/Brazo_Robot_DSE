@@ -4,6 +4,7 @@
 #include "memoria.h"
 #include "utilidades.h"
 #include "ADC1.h"
+#include "commons.h"
 
 void inic_ADC1 (void)
 {
@@ -66,7 +67,7 @@ AD1PCFGLbits.PCFG4 = 0;   // sensor temperatura analógico = 0
 
 // Bits y campos relacionados con las interrupciones
 IFS0bits.AD1IF = 0;    
-IEC0bits.AD1IE = 0;    
+IEC0bits.AD1IE = 1;    
 //IPC3bits.AD1IP=xx; // Registro para controlar la prioridad    
 
 //AD1CON
@@ -77,14 +78,14 @@ AD1CON1bits.ADON = 1;  // Habilitar el modulo ADC
 // comienzo del muestreo por programa
 void comienzo_muestreo ()
 {
-    AD1CON1bits.SAMP = 1; 
+    AD1CON1bits.SAMP = 1;
 }
 
 // Funcion que recoge el valor del convertidor por encuesta
 void recoger_valorADC1 ()
 {   
-    static unsigned int valor_pot; //Variable que almacena el valor del potenciomentro (en interrupcion sera global)
-    static unsigned int valor_temp;
+    static unsigned int valor_pot; // Variable que almacena el valor del potenciomentro (en interrupcion sera global)
+    static unsigned int valor_temp; // Variable que almacena el valor de la temperatura (en interrupcion sera global)
     if (AD1CON1bits.DONE){
          
         switch(AD1CHS0bits.CH0SA) {
@@ -105,4 +106,38 @@ void recoger_valorADC1 ()
     }
 }
 
+int flag_ADC1 = 1;
+static unsigned int valor_pot; // Variable que almacena el valor del potenciomentro (en interrupcion sera global)
+static unsigned int valor_temp; // Variable que almacena el valor de la temperatura
+int flag_muestras;
+unsigned int tabla_pot[8];
+unsigned int tabla_temp[8];
+
+void recoger_valorADC1_int() {
+    if (AD1CON1bits.DONE){
+    switch(AD1CHS0bits.CH0SA) {
+            case 4:
+                valor_temp = ADC1BUF0;
+                
+                conversion_adc(&Ventana_LCD[0][12],valor_temp);
+                AD1CHS0bits.CH0SA = 5; // elige el potenciometro
+                break;
+            
+            case 5:
+                valor_pot = ADC1BUF0;
+                conversion_adc(&Ventana_LCD[0][3],valor_pot);
+                AD1CHS0bits.CH0SA = 4; // elige el sensor de temperatura
+                break;
+        }
+    
+         comienzo_muestreo();
+    }
+}
+
+// Rutina de atención del ADC1
+void _ISR_NO_PSV _ADC1Interrupt() {
+    if(flag_ADC1 == 1) {
+        recoger_valorADC1_int();
+    } 
+}
 
