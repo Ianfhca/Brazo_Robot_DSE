@@ -106,38 +106,48 @@ void recoger_valorADC1 ()
     }
 }
 
-int flag_ADC1 = 1;
-static unsigned int valor_pot; // Variable que almacena el valor del potenciomentro (en interrupcion sera global)
-static unsigned int valor_temp; // Variable que almacena el valor de la temperatura
+int flag_ADC1 = 0;
 int flag_muestras;
 unsigned int tabla_pot[8];
 unsigned int tabla_temp[8];
 
 void recoger_valorADC1_int() {
-    if (AD1CON1bits.DONE){
+    static unsigned int valor_pot; // Variable que almacena el valor del potenciomentro (en interrupcion sera global)
+    static unsigned int valor_temp; // Variable que almacena el valor de la temperatura
+    static unsigned int numMuestrasPot = 0;
+    static unsigned int numMuestrasTemp = 0;
+    
+    if (flag_ADC1){
     switch(AD1CHS0bits.CH0SA) {
             case 4:
                 valor_temp = ADC1BUF0;
-                
-                conversion_adc(&Ventana_LCD[0][12],valor_temp);
+                tabla_temp[numMuestrasTemp] = valor_temp;
+                numMuestrasTemp++;
+                //conversion_adc(&Ventana_LCD[0][12],valor_temp);
                 AD1CHS0bits.CH0SA = 5; // elige el potenciometro
                 break;
             
             case 5:
                 valor_pot = ADC1BUF0;
-                conversion_adc(&Ventana_LCD[0][3],valor_pot);
+                tabla_pot[numMuestrasPot] = valor_pot;
+                numMuestrasPot++;
+                //conversion_adc(&Ventana_LCD[0][3],valor_pot);
                 AD1CHS0bits.CH0SA = 4; // elige el sensor de temperatura
                 break;
         }
     
          comienzo_muestreo();
+         
+         flag_ADC1 = 0;
+         
+         if (numMuestrasPot==8 && numMuestrasTemp==8){
+             flag_muestras = 1;
+         }
     }
 }
 
 // Rutina de atención del ADC1
 void _ISR_NO_PSV _ADC1Interrupt() {
-    if(flag_ADC1 == 1) {
-        recoger_valorADC1_int();
-    } 
+    flag_ADC1 = 1;
 }
 

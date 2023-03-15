@@ -80,8 +80,19 @@ int main()
 	while(1) {
         crono();     
         comprobar_inic_crono();
-        if (&flag_muestras == 1) {
-            // Funcion que haga la media de las 16 muestras tomadas
+        recoger_valorADC1_int();
+        if (flag_muestras == 1) {
+            int mediaMuestrasPot, mediaMuestrasTemp, i;
+            
+            for(i=0; i<=8; i++){
+                mediaMuestrasPot += tabla_pot[i];
+                mediaMuestrasTemp += tabla_temp[i];
+            }
+            
+            mediaMuestrasPot = mediaMuestrasPot/8;
+            mediaMuestrasTemp = mediaMuestrasTemp/8;
+            
+            flag_muestras = 0;
         }
         // recoger_valorADC1();
 	}
