@@ -111,9 +111,9 @@ int flag_muestras;
 unsigned int tabla_pot[8];
 unsigned int tabla_temp[8];
 
-void recoger_valorADC1_int() {
-    static unsigned int valor_pot; // Variable que almacena el valor del potenciomentro (en interrupcion sera global)
-    static unsigned int valor_temp; // Variable que almacena el valor de la temperatura
+void comprobarFlagInterrupcionADC() {
+    unsigned int valor_pot; // Variable que almacena el valor del potenciomentro (en interrupcion sera global)
+    unsigned int valor_temp; // Variable que almacena el valor de la temperatura
     static unsigned int numMuestrasPot = 0;
     static unsigned int numMuestrasTemp = 0;
     

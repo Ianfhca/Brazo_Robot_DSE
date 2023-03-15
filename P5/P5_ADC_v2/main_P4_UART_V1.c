@@ -80,7 +80,7 @@ int main()
 	while(1) {
         crono();     
         comprobar_inic_crono();
-        recoger_valorADC1_int();
+        comprobarFlagInterrupcionADC(); //Funcion que recoge el valor del adc dentro de la tabla si se activa el flag por la rutina de atencion
         if (flag_muestras == 1) {
             int mediaMuestrasPot, mediaMuestrasTemp, i;
             
@@ -92,9 +92,11 @@ int main()
             mediaMuestrasPot = mediaMuestrasPot/8;
             mediaMuestrasTemp = mediaMuestrasTemp/8;
             
+            conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
+            conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
+            
             flag_muestras = 0;
         }
-        // recoger_valorADC1();
 	}
     
 	return (0);
