@@ -64,6 +64,9 @@ AD1PCFGL = 0xFFFF;      // Puerto B, todos digitales
 // Inicializar como analogicas solo las que vayamos a usar
 AD1PCFGLbits.PCFG5 = 0;   // potenciometro analógico = 0
 AD1PCFGLbits.PCFG4 = 0;   // sensor temperatura analógico = 0
+AD1PCFGLbits.PCFG0 = 0; //Px
+AD1PCFGLbits.PCFG1 = 0; //Py
+AD1PCFGLbits.PCFG2 = 0; //Palanca
 
 // Bits y campos relacionados con las interrupciones
 IFS0bits.AD1IF = 0;    
@@ -110,6 +113,9 @@ int flag_ADC1 = 0;
 int flag_muestras = 0;
 unsigned int tabla_pot[8];
 unsigned int tabla_temp[8];
+unsigned int tabla_Px[8];
+unsigned int tabla_Py[8];
+unsigned int tabla_Palanca[8];
 
 void calcularMediaMuestras(){
    
@@ -117,7 +123,7 @@ void calcularMediaMuestras(){
 
     for(i=0; i<8; i++){
         mediaMuestrasPot += tabla_pot[i];
-        mediaMuestrasTemp += tabla_temp[i];
+        mediaMuestrasTemp += tabla_Palanca[i];
     }
 
     mediaMuestrasPot = mediaMuestrasPot/8;
@@ -134,28 +140,38 @@ void calcularMediaMuestras(){
 
 // Rutina de atención del ADC1
 void _ISR_NO_PSV _ADC1Interrupt() {
-    static unsigned int numMuestrasPot = 0;
-    static unsigned int numMuestrasTemp = 0;
+    static unsigned int numMuestras = 0;
     
     switch(AD1CHS0bits.CH0SA) {
+        
+        case 0:
+            tabla_Px[numMuestras] = ADC1BUF0;
+                AD1CHS0bits.CH0SA = 1; // elige el Py
+            break;
+        
+        case 1:
+            tabla_Py[numMuestras] = ADC1BUF0;
+                AD1CHS0bits.CH0SA = 2; // elige el Py
+            break;    
+        case 2:
+            tabla_Palanca[numMuestras] = ADC1BUF0;
+                AD1CHS0bits.CH0SA = 4; // elige el Py
+            break;
+        
             case 4:
-                tabla_temp[numMuestrasTemp] = ADC1BUF0;
-                numMuestrasTemp++;
-                //conversion_adc(&Ventana_LCD[0][12],valor_temp);
+                tabla_temp[numMuestras] = ADC1BUF0;
                 AD1CHS0bits.CH0SA = 5; // elige el potenciometro
                 break;
             
             case 5:
-                tabla_pot[numMuestrasPot] = ADC1BUF0;
-                numMuestrasPot++;
-                //conversion_adc(&Ventana_LCD[0][3],valor_pot);
-                AD1CHS0bits.CH0SA = 4; // elige el sensor de temperatura
+                tabla_pot[numMuestras] = ADC1BUF0;
+                numMuestras++;
+                AD1CHS0bits.CH0SA = 0; // elige el sensor de temperatura
                 break;
         }
          
-         if (numMuestrasPot==8 && numMuestrasTemp==8){
-             numMuestrasPot = 0;
-             numMuestrasTemp = 0;
+         if (numMuestras==8){
+             numMuestras = 0;
              flag_muestras = 1;
              AD1CON1bits.ADON = 0; 
          }else{
