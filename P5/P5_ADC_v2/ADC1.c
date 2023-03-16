@@ -107,47 +107,61 @@ void recoger_valorADC1 ()
 }
 
 int flag_ADC1 = 0;
-int flag_muestras;
+int flag_muestras = 0;
 unsigned int tabla_pot[8];
 unsigned int tabla_temp[8];
 
-void comprobarFlagInterrupcionADC() {
-    unsigned int valor_pot; // Variable que almacena el valor del potenciomentro (en interrupcion sera global)
-    unsigned int valor_temp; // Variable que almacena el valor de la temperatura
+void calcularMediaMuestras(){
+   
+    unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, i;
+
+    for(i=0; i<8; i++){
+        mediaMuestrasPot += tabla_pot[i];
+        mediaMuestrasTemp += tabla_temp[i];
+    }
+
+    mediaMuestrasPot = mediaMuestrasPot/8;
+    mediaMuestrasTemp = mediaMuestrasTemp/8;
+
+    conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
+    conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
+
+    AD1CON1bits.ADON = 1;
+    comienzo_muestreo();
+    flag_muestras = 0;
+        
+}
+
+// Rutina de atención del ADC1
+void _ISR_NO_PSV _ADC1Interrupt() {
     static unsigned int numMuestrasPot = 0;
     static unsigned int numMuestrasTemp = 0;
     
-    if (flag_ADC1){
     switch(AD1CHS0bits.CH0SA) {
             case 4:
-                valor_temp = ADC1BUF0;
-                tabla_temp[numMuestrasTemp] = valor_temp;
+                tabla_temp[numMuestrasTemp] = ADC1BUF0;
                 numMuestrasTemp++;
                 //conversion_adc(&Ventana_LCD[0][12],valor_temp);
                 AD1CHS0bits.CH0SA = 5; // elige el potenciometro
                 break;
             
             case 5:
-                valor_pot = ADC1BUF0;
-                tabla_pot[numMuestrasPot] = valor_pot;
+                tabla_pot[numMuestrasPot] = ADC1BUF0;
                 numMuestrasPot++;
                 //conversion_adc(&Ventana_LCD[0][3],valor_pot);
                 AD1CHS0bits.CH0SA = 4; // elige el sensor de temperatura
                 break;
         }
-    
-         comienzo_muestreo();
-         
-         flag_ADC1 = 0;
          
          if (numMuestrasPot==8 && numMuestrasTemp==8){
+             numMuestrasPot = 0;
+             numMuestrasTemp = 0;
              flag_muestras = 1;
+             AD1CON1bits.ADON = 0; 
+         }else{
+             comienzo_muestreo();
          }
-    }
-}
-
-// Rutina de atención del ADC1
-void _ISR_NO_PSV _ADC1Interrupt() {
-    flag_ADC1 = 1;
+    
+    IFS0bits.AD1IF = 0;   
 }
 

@@ -9,3 +9,5 @@ void inic_crono();
 void Delay_ms(int milisegundos);
 void Delay_us(int microsegundos);
 void inic_Timer5();
+void crono();
+void comprobar_inic_crono();

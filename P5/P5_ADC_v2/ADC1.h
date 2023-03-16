@@ -7,5 +7,5 @@ extern unsigned int tabla_temp[8];
 void inic_ADC1 ();
 void comienzo_muestreo ();
 void recoger_valorADC1 ();
-
+void calcularMediaMuestras();
 
