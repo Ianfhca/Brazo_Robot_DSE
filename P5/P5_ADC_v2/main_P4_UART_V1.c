@@ -66,6 +66,7 @@ int main()
 
 	inic_Timer7();	// Inicialización T7 con un periodo de 10 milisegundos.
     inic_Timer5(); // Inicialización T5 con un periodo de 2.5 milisegundos.
+    inic_Timer3(); // Inicialización T5 con un periodo de 1 milisegundos.
     
     inic_CN(); // Inicialización de las interrupciones para los pulsadores.
     
@@ -74,7 +75,7 @@ int main()
     U2TXREG = 0; // Envio de bit nulo atraves del modulo UART2
     
     inic_ADC1();
-    comienzo_muestreo();
+    // comienzo_muestreo();
     
     
 	while(1) {

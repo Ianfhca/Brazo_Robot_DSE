@@ -4,6 +4,7 @@
 #include "memoria.h"
 #include "utilidades.h"
 #include "UART2_RS232.h"
+#include "ADC1.h"
 
 void inic_Timer7 ()
 {
@@ -31,6 +32,21 @@ void inic_Timer5 ()
     T5CONbits.TON = 1;	// puesta en marcha del timer
     
     IEC1bits.T5IE = 1;
+}
+
+void inic_Timer3 ()
+{
+    TMR3 = 0 ; 	// Inicializar el registro de cuenta
+    PR3 =  40000;
+	
+    T3CONbits.TCKPS = 0;	// escala del prescaler 1:1
+    T3CONbits.TCS = 0;	// reloj interno
+    T3CONbits.TGATE = 0;	// Deshabilitar el modo Gate
+    
+    T3CONbits.TON = 1;	// puesta en marcha del timer
+    
+    IEC0bits.T3IE = 1;
+    IFS0bits.T3IF = 0;
 }
 
 unsigned int mili, deci, seg, min;
@@ -67,6 +83,8 @@ void crono()
         conversion_tiempo(&Ventana_LCD[1][13], deci);
     }
     if (deci == 10) {
+        Nop();
+        Nop();
         LATAbits.LATA0 = !LATAbits.LATA0;
         deci = 0;
         seg++;
@@ -123,6 +141,14 @@ void _ISR_NO_PSV _T5Interrupt()
     }
     
     IFS1bits.T5IF = 0;
+}
+
+void _ISR_NO_PSV _T3Interrupt()	
+// control del tiempo espera 1 ms y luego actualiza
+{
+    //comienzo_muestreo();
+    recoger_valorADC1();
+    IFS0bits.T3IF = 0;
 }
 
 void Delay_ms(int milisegundos) 
