@@ -83,8 +83,6 @@ void crono()
         conversion_tiempo(&Ventana_LCD[1][13], deci);
     }
     if (deci == 10) {
-        Nop();
-        Nop();
         LATAbits.LATA0 = !LATAbits.LATA0;
         deci = 0;
         seg++;

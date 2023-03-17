@@ -90,20 +90,19 @@ void recoger_valorADC1 ()
 {   
      static unsigned int numMuestras = 0;
     
-    switch(AD1CHS0bits.CH0SA) {
-        
+    switch(AD1CHS0bits.CH0SA) {   
         case 0:
             tabla_Px[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 1; // elige el Py
+            AD1CHS0bits.CH0SA = 1; // elige el Py
             break;
         
         case 1:
             tabla_Py[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 2; // elige el Py
+            AD1CHS0bits.CH0SA = 2; // elige el Py
             break;    
         case 2:
             tabla_Palanca[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 4; // elige el Py
+            AD1CHS0bits.CH0SA = 4; // elige el Py
             break;
         
             case 4:
