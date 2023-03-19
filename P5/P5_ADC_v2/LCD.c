@@ -1,10 +1,5 @@
 /**********************************************************************
-LCD erabiltzeko funtzioak:
-	Hasieraketa
-	Komando bat bidali
-	Datu bat bistaratu
-	Testu bat bistaratu
-	Funtzio bereziak: 1. lerroan kokatu // 2. lerroan kokatu
+ * Funciones para el funcionamiento del LCD
 **********************************************************************/
 
 #include "p24HJ256GP610A.h"

@@ -47,7 +47,7 @@ AD1CHS123 = 0;	//seleccion del canal 1,2 eta 3
 
 // Inicializacion registro AD1CHS0
 AD1CHS0 = 0;
-AD1CHS0bits.CH0SA = 5; // elige la entrada analogica conectada
+AD1CHS0bits.CH0SA = 5; // elige la entrada analogica conectada, 5: potenciometro
 
 //AD1CHS0bits.CH0SB = 0;
 
@@ -85,7 +85,7 @@ void comienzo_muestreo ()
 }
 
 unsigned long num_interrupt = 0;
-// Funcion que recoge el valor del convertidor por encuesta
+// Funcion que recoge el valor del adc cada milisegundo, se llama en la rutina de atencion de T3
 void recoger_valorADC1 ()
 {   
      static unsigned int numMuestras = 0;
@@ -120,13 +120,13 @@ void recoger_valorADC1 ()
          if (numMuestras==8){
              numMuestras = 0;
              flag_muestras = 1;
-             AD1CON1bits.ADON = 0; 
-         }else{
-             //comienzo_muestreo();
+             AD1CON1bits.ADON = 0;  //Deshabilita ADC
          }
+    
     num_interrupt++;
 }
 
+//Variables de arrays para almacenar las muestras y flags
 int flag_ADC1 = 0;
 int flag_muestras = 0;
 unsigned int tabla_pot[8];
@@ -150,53 +150,7 @@ void calcularMediaMuestras(){
     conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
     conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
 
-    AD1CON1bits.ADON = 1;
+    AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
     comienzo_muestreo();
     flag_muestras = 0;
-        
-}
-
-// Rutina de atención del ADC1
-
-void _ISR_NO_PSV _ADC1Interrupt() {
-    static unsigned int numMuestras = 0;
-    
-    switch(AD1CHS0bits.CH0SA) {
-        
-        case 0:
-            tabla_Px[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 1; // elige el Py
-            break;
-        
-        case 1:
-            tabla_Py[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 2; // elige el Py
-            break;    
-        case 2:
-            tabla_Palanca[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 4; // elige el Py
-            break;
-        
-            case 4:
-                tabla_temp[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 5; // elige el potenciometro
-                break;
-            
-            case 5:
-                tabla_pot[numMuestras] = ADC1BUF0;
-                numMuestras++;
-                AD1CHS0bits.CH0SA = 0; // elige el sensor de temperatura
-                break;
-        }
-         
-         if (numMuestras==8){
-             numMuestras = 0;
-             flag_muestras = 1;
-             AD1CON1bits.ADON = 0; 
-         }else{
-             comienzo_muestreo();
-         }
-    num_interrupt++;
-    IFS0bits.AD1IF = 0;   
-    
 }

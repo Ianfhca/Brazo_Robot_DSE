@@ -1,15 +1,6 @@
-/*
-Komentarioak!!!
-Egileak eta data!!!
-*/
-
 #include "p24HJ256GP610A.h"
 
-// Funcion para obtener los caracteres de un valor de dos digitos (<100)
-// Parametros:
-// val, valor numerico del que se quieren obtener los caracteres ASCII
-// dir, direccion a partir de la cual queremos que la funcion devuelva los codigos ASCII
-// En dir estara el caracter de mas peso y en dir+1 el de menos peso
+// Funciones para obtener los caracteres de un valor de dos digitos y de cuatro (conversion_adc)
 
 
 unsigned char tabla_carac[16]="0123456789";

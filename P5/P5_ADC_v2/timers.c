@@ -142,9 +142,8 @@ void _ISR_NO_PSV _T5Interrupt()
 }
 
 void _ISR_NO_PSV _T3Interrupt()	
-// control del tiempo espera 1 ms y luego actualiza
+// control del tiempo espera 1 ms y recoge el valor del ADC1
 {
-    //comienzo_muestreo();
     recoger_valorADC1();
     IFS0bits.T3IF = 0;
 }

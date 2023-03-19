@@ -1,8 +1,7 @@
 /*
- * File:   main_P3_LCD_V2.c
+ * File:   main_P5_ADC_V2.c
  * Authors: Luis Castillo and Ian Fernandez
  *
- * Created on 16 de febrero de 2023, 15:55
  */
 
 #include "p24HJ256GP610A.h"
@@ -18,8 +17,6 @@
 #include "UART2_RS232.h"
 #include "ADC1.h"
 
-// TCKPS para el prescaler
-
 int main()
 {
 	inic_oscilator();	// Seleccón e inicialización del reloj: 80 MHz
@@ -30,6 +27,7 @@ int main()
     
     inic_LCD(); // Inicialización de la pantalla LCD
     
+    //mensajes iniciales LCD:
     copiar_FLASH_RAM(Mens_LCD_1, 0);
     copiar_FLASH_RAM(Mens_LCD_2, 1);
     
@@ -74,16 +72,15 @@ int main()
     
     U2TXREG = 0; // Envio de bit nulo atraves del modulo UART2
     
-    inic_ADC1();
+    inic_ADC1();  //Inicializacion del modulo ADC
     // comienzo_muestreo();
-    
     
 	while(1) {
         crono();     
         comprobar_inic_crono();
 
-        if (flag_muestras == 1) {
-            calcularMediaMuestras();
+        if (flag_muestras == 1) { //Se ha completado la recoleccion de las 8 muestras de cada dispositivo analogico
+            calcularMediaMuestras(); //Se calculan la media de las muestras y se despliegan en LCD
         }
 	}
     

@@ -1,8 +1,5 @@
 /*
 Funciones de inicializacion y tratamiento de pulsadores y leds
-
-Egileak: Izaskun
-Data: Febrero 2020
 */
 
 

@@ -1,8 +1,5 @@
 /* Funciones para trabajar con el modulo UART2
 ================================================
-Comentarios!!!!!!!!!!!
-Autorxs: 
-Fecha:
 */
 
 #include "p24HJ256GP610A.h"
