@@ -9,3 +9,4 @@ extern unsigned int DUTY_MAX;
 // FUNCIONES
 //=========================================================
 void inic_OC1 ();
+void mostrar_OC1();

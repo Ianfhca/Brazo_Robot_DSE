@@ -5,6 +5,7 @@
 #include "utilidades.h"
 #include "UART2_RS232.h"
 #include "ADC1.h"
+#include "commons_P6.h"
 
 void inic_Timer7 ()
 {
@@ -47,6 +48,21 @@ void inic_Timer3 ()
     
     IEC0bits.T3IE = 1;
     IFS0bits.T3IF = 0;
+}
+
+void inic_Timer2 ()
+{
+    TMR2 = 0 ; 	// Inicializar el registro de cuenta
+    PR2 =  PR20ms;
+	
+    T2CONbits.TCKPS = 2;	// escala del prescaler 1:64
+    T2CONbits.TCS = 0;	// reloj interno
+    T2CONbits.TGATE = 0;	// Deshabilitar el modo Gate
+    
+    T2CONbits.TON = 1;	// puesta en marcha del timer
+    
+    IEC0bits.T2IE = 0;
+    IFS0bits.T2IF = 0;
 }
 
 unsigned int mili, deci, seg, min;

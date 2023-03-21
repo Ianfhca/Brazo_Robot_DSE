@@ -16,6 +16,7 @@
 #include "utilidades.h"
 #include "UART2_RS232.h"
 #include "ADC1.h"
+#include "OCPWM.h"
 
 int main()
 {
@@ -73,7 +74,9 @@ int main()
     U2TXREG = 0; // Envio de bit nulo atraves del modulo UART2
     
     inic_ADC1();  //Inicializacion del modulo ADC
-    // comienzo_muestreo();
+
+    inic_OC1();
+    inic_Timer2();
     
 	while(1) {
         crono();     
@@ -81,6 +84,7 @@ int main()
 
         if (flag_muestras == 1) { //Se ha completado la recoleccion de las 8 muestras de cada dispositivo analogico
             calcularMediaMuestras(); //Se calculan la media de las muestras y se despliegan en LCD
+            mostrar_OC1();
         }
 	}
     

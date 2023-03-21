@@ -148,7 +148,7 @@ void calcularMediaMuestras(){
     mediaMuestrasTemp = mediaMuestrasTemp/8;
 
     conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
-    conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
+    //conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
 
     AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
     comienzo_muestreo();
