@@ -47,7 +47,7 @@ AD1CHS123 = 0;	//seleccion del canal 1,2 eta 3
 
 // Inicializacion registro AD1CHS0
 AD1CHS0 = 0;
-AD1CHS0bits.CH0SA = 5; // elige la entrada analogica conectada, 5: potenciometro
+AD1CHS0bits.CH0SA = 5; // Elige la entrada analogica conectada, 5: potenciometro
 
 //AD1CHS0bits.CH0SB = 0;
 
