@@ -8,6 +8,7 @@
 #include "UART2_RS232.h"
 #include "timers.h"
 #include "memoria.h"
+#include "OCPWM.h"
 
 
 
@@ -60,6 +61,17 @@ void _ISR_NO_PSV _U2RXInterrupt() {
     else if(c=='c' || c=='C'){
         T7CONbits.TON = 1;
     }
+    else if(c=='m' || c=='M'){
+        if(OC1RS+10<DUTY_MAX){
+            OC1RS+=10;
+        }
+    }
+    else if(c=='d' || c=='D'){
+        if(OC1RS-10>DUTY_MIN){
+            OC1RS-=10;
+        }
+    }
+    
     Ventana_LCD[1][15] = c;
     IFS1bits.U2RXIF = 0;
 }
