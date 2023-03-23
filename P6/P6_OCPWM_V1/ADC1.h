@@ -1,5 +1,6 @@
 
 // Constantes y variables
+#define MAX_POT 1023
 extern int flag_muestras;
 extern unsigned int tabla_pot[8];
 extern unsigned int tabla_temp[8];
@@ -10,5 +11,5 @@ extern unsigned int tabla_Palanca[8];
 void inic_ADC1 ();
 void comienzo_muestreo ();
 void recoger_valorADC1 ();
-void calcularMediaMuestras();
+void calcular_media_muestras();
 

@@ -4,4 +4,5 @@ build/default/debug/_ext/1472/ADC1.o:  \
 ../memoria.h  \
  ../utilidades.h  \
 ../ADC1.h  \
-../commons.h 
+../commons.h  \
+../OCPWM.h 

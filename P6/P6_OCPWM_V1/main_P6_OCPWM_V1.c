@@ -76,15 +76,23 @@ int main()
     inic_ADC1();  //Inicializacion del modulo ADC
 
     inic_OC1();
+    mostrar_OC1();
     inic_Timer2();
+    
     
 	while(1) {
         crono();     
         comprobar_inic_crono();
 
         if (flag_muestras == 1) { //Se ha completado la recoleccion de las 8 muestras de cada dispositivo analogico
-            calcularMediaMuestras(); //Se calculan la media de las muestras y se despliegan en LCD
+            calcular_media_muestras(); //Se calculan la media de las muestras y se despliegan en LCD
+            
+            flag_servo = 1;
+            flag_muestras = 0;
+        }
+        if (flag_servo == 1) {
             mostrar_OC1();
+            flag_servo = 0;
         }
 	}
     

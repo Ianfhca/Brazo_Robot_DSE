@@ -5,6 +5,7 @@
 #include "utilidades.h"
 #include "ADC1.h"
 #include "commons.h"
+#include "OCPWM.h"
 
 void inic_ADC1 (void)
 {
@@ -135,7 +136,7 @@ unsigned int tabla_Px[8];
 unsigned int tabla_Py[8];
 unsigned int tabla_Palanca[8];
 
-void calcularMediaMuestras(){
+void calcular_media_muestras(){
    
     unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, i;
 
@@ -149,8 +150,7 @@ void calcularMediaMuestras(){
 
     conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
     //conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
+    relacion_adc_pwm(mediaMuestrasPot);
 
     AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
-    comienzo_muestreo();
-    flag_muestras = 0;
 }

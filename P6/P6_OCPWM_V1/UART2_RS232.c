@@ -52,24 +52,28 @@ void inic_UART2 ()
 
 void _ISR_NO_PSV _U2RXInterrupt() {
     char c = U2RXREG;
-    if (c == 'p' || c == 'P') {
+    switch (c){
+    case 'p':
         T7CONbits.TON = 0;
-    }
-    else if(c == 'i' || c=='I'){
+        break;
+    case 'i':
         inic_crono();
-    }
-    else if(c=='c' || c=='C'){
+        break;
+    case 'c':
         T7CONbits.TON = 1;
-    }
-    else if(c=='m' || c=='M'){
-        if(OC1RS+10<DUTY_MAX){
+        break;
+        case 'm': case 'M':
+        if(OC1RS+10<=DUTY_MAX){
             OC1RS+=10;
+            flag_servo = 1;
         }
-    }
-    else if(c=='d' || c=='D'){
-        if(OC1RS-10>DUTY_MIN){
+        break;
+        case 'd': case 'D':
+        if(OC1RS-10>=DUTY_MIN){
             OC1RS-=10;
+            flag_servo = 1;
         }
+        break;
     }
     
     Ventana_LCD[1][15] = c;

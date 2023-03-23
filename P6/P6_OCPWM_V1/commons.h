@@ -38,3 +38,6 @@
 #define posds 13
 #define posseg 10
 #define posmin 7
+
+// Definicion de las funciones
+void inic_CN();

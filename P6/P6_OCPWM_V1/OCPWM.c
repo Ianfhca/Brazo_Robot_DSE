@@ -12,10 +12,11 @@ Fecha:
 #include "commons_P6.h"
 #include "memoria.h"
 #include "utilidades.h"
+#include "ADC1.h"
 
 unsigned int DUTY_MIN = (PR20ms/20) * MINPWM;	// Valor minimo y maximo de DUTY. Se calculan 
 unsigned int DUTY_MAX = (PR20ms/20) * MAXPWM;	// mediante los "define" PR20ms, MINPWM y MAXPWM
-                              
+unsigned int flag_servo = 0;                            
 
 void inic_OC1 ()
 {
@@ -33,4 +34,8 @@ void inic_OC1 ()
 
 void mostrar_OC1() {
     conversion_adc(&Ventana_LCD[0][12], OC1RS);
+}
+
+void relacion_adc_pwm(unsigned int valor_adc) {
+    OC1RS = valor_adc * ((DUTY_MAX - DUTY_MIN)/MAX_POT) + DUTY_MIN;
 }
