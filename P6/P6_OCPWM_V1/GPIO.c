@@ -20,7 +20,7 @@ void inic_pulsadores(){
   
   TRISDbits.TRISD13 = 1; // Pulsador S4
   TRISDbits.TRISD6 = 1; // Pulsador S3
-  
+  TRISAbits.TRISA7 = 1; // Pulsador S5 (cambia de modo)
   
 }
       

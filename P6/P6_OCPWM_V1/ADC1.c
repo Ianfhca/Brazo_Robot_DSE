@@ -17,7 +17,7 @@ AD1CON1 = 0;       // todos los campos a 0
 
 // Comienzo digitalizacion automatico
 // 111=Auto-convert / 010=TMR3 ADC1 y TMR5 ADC2 / 001=INT0 / 000= SAMP 
-AD1CON1bits.SSRC = 7; // Valor 2 para sincronizar con el timer 3 		
+AD1CON1bits.SSRC = 2; // Valor 2 para sincronizar con el timer 3 		
 
 // Muestreo simultaneo o secuencial
 //AD1CON1bits.SIMSAM = 0; 
@@ -71,11 +71,18 @@ AD1PCFGLbits.PCFG2 = 0; //Palanca
 
 // Bits y campos relacionados con las interrupciones
 IFS0bits.AD1IF = 0;    
-IEC0bits.AD1IE = 0;    
+IEC0bits.AD1IE = 1;    
 //IPC3bits.AD1IP=xx; // Registro para controlar la prioridad    
 
 //AD1CON
 AD1CON1bits.ADON = 1;  // Habilitar el modulo ADC
+}
+
+void _ISR_NO_PSV _ADC1Interrupt()	
+// Interrumpe el ADC y se recoge el valor
+{
+    recoger_valorADC1();
+    IFS0bits.AD1IF = 0;
 }
 
 
@@ -150,7 +157,9 @@ void calcular_media_muestras(){
 
     conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
     //conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
-    relacion_adc_pwm(mediaMuestrasPot);
+    
+    if(modo_control)
+        relacion_adc_pwm(mediaMuestrasPot);
 
     AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
 }

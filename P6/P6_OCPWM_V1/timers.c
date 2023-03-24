@@ -46,8 +46,7 @@ void inic_Timer3 ()
     
     T3CONbits.TON = 1;	// puesta en marcha del timer
     
-    IEC0bits.T3IE = 1;
-    IFS0bits.T3IF = 0;
+    IEC0bits.T3IE = 0;
 }
 
 void inic_Timer2 ()
@@ -155,13 +154,6 @@ void _ISR_NO_PSV _T5Interrupt()
     }
     
     IFS1bits.T5IF = 0;
-}
-
-void _ISR_NO_PSV _T3Interrupt()	
-// control del tiempo espera 1 ms y recoge el valor del ADC1
-{
-    recoger_valorADC1();
-    IFS0bits.T3IF = 0;
 }
 
 void Delay_ms(int milisegundos) 
