@@ -10,6 +10,5 @@ extern unsigned int modo_control;
 
 // FUNCIONES
 //=========================================================
-void inic_OC1 ();
-void mostrar_OC1();
+void mostrar_duty();
 void relacion_adc_pwm();

@@ -4,11 +4,11 @@ Tool Name:
   c:\program files (x86)\microchip\xc16\v1.36\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000032dc.00 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000032dc.01 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000032dc.02 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000032dc.03 \
-  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000032dc.04 \
+  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000031f0.00 \
+  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000031f0.01 \
+  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000031f0.02 \
+  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000031f0.03 \
+  -TC:\\Users\\Luis\\AppData\\Local\\Temp\\tmp000031f0.04 \
   -p24HJ256GP610A \
   -o \
   dist/default/debug/P6_OCPWM_V1.X.debug.elf \
@@ -232,7 +232,7 @@ External Symbols in Program Memory (by address):
                   0x000dea                  _line_1
                   0x000df8                  _line_2
                   0x000e06                  _conversion_tiempo
-                  0x000e4e                  _conversion_adc
+                  0x000e4e                  _conversion_4digitos
                   0x000ee6                  _main
                   0x000f9a                  _inic_OC1
                   0x000fc2                  _mostrar_OC1
@@ -282,7 +282,7 @@ External Symbols in Program Memory (by name):
                   0x000ca6                  _calcular_media_muestras
                   0x000bde                  _comienzo_muestreo
                   0x00092e                  _comprobar_inic_crono
-                  0x000e4e                  _conversion_adc
+                  0x000e4e                  _conversion_4digitos
                   0x000e06                  _conversion_tiempo
                   0x0010a2                  _copiar_FLASH_RAM
                   0x000954                  _crono
@@ -512,7 +512,7 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x591e
+.debug_info       0x000000       0x590e
  *(.debug_info)
  .debug_info      0x000000        0xe60 build/default/debug/_ext/1472/ADC1.o
  .debug_info      0x000e60        0xb12 build/default/debug/_ext/1472/CN.o
@@ -520,11 +520,11 @@ __FUID3
  .debug_info      0x001e46        0x8a9 build/default/debug/_ext/1472/LCD.o
  .debug_info      0x0026ef        0x3a1 build/default/debug/_ext/1472/OCPWM.o
  .debug_info      0x002a90        0xbf7 build/default/debug/_ext/1472/UART2_RS232.o
- .debug_info      0x003687        0x275 build/default/debug/_ext/1472/memoria.o
- .debug_info      0x0038fc        0x624 build/default/debug/_ext/1472/oscilator.o
- .debug_info      0x003f20       0x13d3 build/default/debug/_ext/1472/timers.o
- .debug_info      0x0052f3        0x1f9 build/default/debug/_ext/1472/utilidades.o
- .debug_info      0x0054ec        0x432 build/default/debug/_ext/1472/main_P6_OCPWM_V1.o
+ .debug_info      0x003687        0x26e build/default/debug/_ext/1472/memoria.o
+ .debug_info      0x0038f5        0x61d build/default/debug/_ext/1472/oscilator.o
+ .debug_info      0x003f12       0x13d3 build/default/debug/_ext/1472/timers.o
+ .debug_info      0x0052e5        0x1f7 build/default/debug/_ext/1472/utilidades.o
+ .debug_info      0x0054dc        0x432 build/default/debug/_ext/1472/main_P6_OCPWM_V1.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0xa52
@@ -590,7 +590,7 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x48b
+                  0x000000        0x490
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0xf6 build/default/debug/_ext/1472/ADC1.o
@@ -611,9 +611,9 @@ __FUID3
  .debug_pubnames
                   0x00032f         0xf6 build/default/debug/_ext/1472/timers.o
  .debug_pubnames
-                  0x000425         0x4b build/default/debug/_ext/1472/utilidades.o
+                  0x000425         0x50 build/default/debug/_ext/1472/utilidades.o
  .debug_pubnames
-                  0x000470         0x1b build/default/debug/_ext/1472/main_P6_OCPWM_V1.o
+                  0x000475         0x1b build/default/debug/_ext/1472/main_P6_OCPWM_V1.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1992,7 +1992,7 @@ __c30_signature
                   0x000df8                  _line_2
  .text            0x000e06         0xe0 build/default/debug/_ext/1472/utilidades.o
                   0x000e06                  _conversion_tiempo
-                  0x000e4e                  _conversion_adc
+                  0x000e4e                  _conversion_4digitos
  .text            0x000ee6         0xb4 build/default/debug/_ext/1472/main_P6_OCPWM_V1.o
                   0x000ee6                  _main
  .text            0x000f9a         0x74 build/default/debug/_ext/1472/OCPWM.o

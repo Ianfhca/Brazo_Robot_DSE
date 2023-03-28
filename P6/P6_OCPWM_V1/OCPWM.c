@@ -9,7 +9,6 @@ Fecha:
 
 #include "p24HJ256GP610A.h"
 #include "commons.h"
-#include "commons_P6.h"
 #include "memoria.h"
 #include "utilidades.h"
 #include "ADC1.h"
@@ -34,7 +33,7 @@ void inic_OC1 ()
 }
 
 void mostrar_OC1() {
-    conversion_adc(&Ventana_LCD[0][12], OC1RS);
+    conversion_4digitos(&Ventana_LCD[0][12], OC1RS);
 }
 
 void relacion_adc_pwm(unsigned int valor_adc) {

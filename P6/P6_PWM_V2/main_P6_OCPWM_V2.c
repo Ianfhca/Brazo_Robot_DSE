@@ -10,7 +10,6 @@
 #include "GPIO.h"
 #include "timers.h"
 #include "commons.h"
-#include "commons_P4.h"
 #include "LCD.h"
 #include "memoria.h"
 #include "utilidades.h"
@@ -76,8 +75,8 @@ int main()
     inic_Timer3(); // Inicialización T5 con un periodo de 1 milisegundos.
     
     
-    inic_OC1();
-    mostrar_OC1();
+    //inic_OC1();
+    mostrar_duty();
     inic_Timer2();
     
     
@@ -92,7 +91,7 @@ int main()
             flag_muestras = 0;
         }
         if (flag_servo == 1) {
-            mostrar_OC1();
+            mostrar_duty();
             flag_servo = 0;
         }
 	}

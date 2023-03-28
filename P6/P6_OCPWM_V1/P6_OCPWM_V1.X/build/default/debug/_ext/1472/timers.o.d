@@ -5,5 +5,4 @@ build/default/debug/_ext/1472/timers.o:  \
  ../memoria.h  \
 ../utilidades.h  \
 ../UART2_RS232.h  \
-../ADC1.h  \
-../commons_P6.h 
+../ADC1.h 

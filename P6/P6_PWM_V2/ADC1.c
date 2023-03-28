@@ -155,7 +155,7 @@ void calcular_media_muestras(){
     mediaMuestrasPot = mediaMuestrasPot/8;
     mediaMuestrasTemp = mediaMuestrasTemp/8;
 
-    conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
+    conversion_4digitos(&Ventana_LCD[0][3],mediaMuestrasPot);
     //conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
     
     if(modo_control)

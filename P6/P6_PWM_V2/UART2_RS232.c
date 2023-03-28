@@ -4,7 +4,6 @@
 
 #include "p24HJ256GP610A.h"
 #include "commons.h"
-#include "commons_P4.h"
 #include "UART2_RS232.h"
 #include "timers.h"
 #include "memoria.h"

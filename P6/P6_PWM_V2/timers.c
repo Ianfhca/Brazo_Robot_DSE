@@ -5,7 +5,6 @@
 #include "utilidades.h"
 #include "UART2_RS232.h"
 #include "ADC1.h"
-#include "commons_P6.h"
 #include "OCPWM.h"
 
 void inic_Timer7() {
@@ -167,7 +166,7 @@ void _ISR_NO_PSV _T2Interrupt() {
             break;
 
         case 1:
-            PR2 = PR20ms-DUTY;
+            PR2 = PR20ms-PR2;
             LATDbits.LATD0 = 0;
             state_T2 = 0;
             break;

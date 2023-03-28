@@ -5,7 +5,6 @@
 #include "utilidades.h"
 #include "UART2_RS232.h"
 #include "ADC1.h"
-#include "commons_P6.h"
 
 void inic_Timer7 ()
 {

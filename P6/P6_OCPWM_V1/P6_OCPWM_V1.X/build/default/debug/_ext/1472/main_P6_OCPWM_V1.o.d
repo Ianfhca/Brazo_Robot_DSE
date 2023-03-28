@@ -4,10 +4,9 @@ build/default/debug/_ext/1472/main_P6_OCPWM_V1.o:  \
 ../GPIO.h  \
 ../timers.h  \
 ../commons.h  \
-../commons_P4.h  \
- ../LCD.h  \
+../LCD.h  \
 ../memoria.h  \
-../utilidades.h  \
+ ../utilidades.h  \
 ../UART2_RS232.h  \
 ../ADC1.h  \
- ../OCPWM.h 
+../OCPWM.h 
