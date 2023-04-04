@@ -43,3 +43,12 @@ void conversion_4digitos (unsigned char * dir, unsigned int val)
         *dir=dig;
     }
 }
+
+unsigned int conversion_BytesToInt(unsigned char *dist){
+    
+ unsigned int resultado;
+
+resultado = (unsigned int)(dist[0] << 8) | dist[1];
+
+return resultado;
+}

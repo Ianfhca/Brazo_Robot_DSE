@@ -63,6 +63,7 @@ int main()
     inic_crono();	// Inicialización variables cronometro.
 
 	inic_Timer7();	// Inicialización T7 con un periodo de 10 milisegundos.
+
     inic_Timer5(); // Inicialización T5 con un periodo de 2.5 milisegundos.
     
     inic_CN(); // Inicialización de las interrupciones para los pulsadores.
@@ -80,9 +81,11 @@ int main()
     inic_Timer2();
     
     InitI2C_1();
+    inic_Timer6();
     
     unsigned char dist[2];
-    unsigned char dirI2C = 0xE0;
+    unsigned char dirI2C = 0xE2;
+    unsigned int aux = 0;
     
     inic_medicion_dis(dirI2C); 
     
@@ -95,19 +98,27 @@ int main()
             
             flag_muestras = 0;
         }
-        if (flag_servo == 1) {
+        /*if (flag_servo == 1) {
             mostrar_duty();
             flag_servo = 0;
-        }
+        }*/
         
         if(flag_T6){
             T6CONbits.TON = 0;
             TMR6 = 0;
             
             leer_medicion(dirI2C, dist);
+            
+            Nop();
+            Nop();
+            aux = conversion_BytesToInt(dist);
+            
+            conversion_4digitos(&Ventana_LCD[0][12], aux);
+            
             inic_medicion_dis(dirI2C);
             
             T6CONbits.TON = 1;
+            flag_T6 = 0;
         }
 	}
     

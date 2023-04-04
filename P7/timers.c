@@ -22,7 +22,7 @@ void inic_Timer7() {
 
 void inic_Timer6() {
     TMR6 = 0; // Inicializar el registro de cuenta
-    PR6 = 40625;
+    PR6 = 43750;
     
     T6CONbits.TCKPS = 2; // escala del prescaler 1:64
     T6CONbits.TCS = 0; // reloj interno
@@ -133,7 +133,7 @@ unsigned int flag_T6 = 0;
 void _ISR_NO_PSV _T6Interrupt()
 {
     flag_T6 = 1;
-    IFS3bits.T7IF = 0;
+    IFS2bits.T6IF = 0;
 }
 
 // control del tiempo espera 2.5 ms y luego actualiza
