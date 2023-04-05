@@ -98,10 +98,6 @@ int main()
             
             flag_muestras = 0;
         }
-        /*if (flag_servo == 1) {
-            mostrar_duty();
-            flag_servo = 0;
-        }*/
         
         if(flag_T6){
             T6CONbits.TON = 0;
@@ -109,8 +105,6 @@ int main()
             
             leer_medicion(dirI2C, dist);
             
-            Nop();
-            Nop();
             aux = conversion_BytesToInt(dist);
             
             conversion_4digitos(&Ventana_LCD[0][12], aux);
