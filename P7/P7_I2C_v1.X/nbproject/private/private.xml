@@ -3,12 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/MIS%20COSAS/UNIVERSIDAD/DSE/P7/i2c_funciones.c</file>
-            <file>file:/D:/MIS%20COSAS/UNIVERSIDAD/DSE/P7/OCPWM.c</file>
-            <file>file:/D:/MIS%20COSAS/UNIVERSIDAD/DSE/P7/timers.c</file>
-            <file>file:/D:/MIS%20COSAS/UNIVERSIDAD/DSE/P7/i2c_funciones.h</file>
-            <file>file:/D:/MIS%20COSAS/UNIVERSIDAD/DSE/P7/main_P6_OCPWM_V2.c</file>
-            <file>file:/D:/MIS%20COSAS/UNIVERSIDAD/DSE/P7/srf08.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/srf08.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/i2c_funciones.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/main_P6_OCPWM_V2.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/ADC1.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/OCPWM.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/GPIO.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/timers.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/i2c_funciones.h</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/srf08.h</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/utilidades.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/memoria.c</file>
+            <file>file:/D:/UPV/DSE/GitHub/DSE/P7/utilidades.h</file>
         </group>
     </open-files>
 </project-private>
