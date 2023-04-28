@@ -13,6 +13,7 @@
 #include "commons.h"
 #include "LCD.h"
 #include "memoria.h"
+#include "UART2_RS232.h"
 #include "utilidades.h"
 
 int main(void) {
@@ -43,6 +44,11 @@ int main(void) {
     inic_Timer5(); // Inicializacion T5 con un periodo de 2.5 milisegundos.
     
     inic_CN(); // Inicializacion de las interrupciones para los pulsadores.
+    
+    inic_UART2();
+    U2TXREG = 0;
+    
+    inic_ADC1();
     
     while(1){
         crono();     

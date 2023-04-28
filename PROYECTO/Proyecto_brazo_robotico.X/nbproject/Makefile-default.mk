@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c memoria.c CN.c GPIO.c timers.c utilidades.c LCD.c oscilator.c UART2_RS232.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c memoria.c CN.c GPIO.c timers.c utilidades.c LCD.c oscilator.c UART2_RS232.c ADC1.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/memoria.o ${OBJECTDIR}/CN.o ${OBJECTDIR}/GPIO.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/utilidades.o ${OBJECTDIR}/LCD.o ${OBJECTDIR}/oscilator.o ${OBJECTDIR}/UART2_RS232.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/memoria.o.d ${OBJECTDIR}/CN.o.d ${OBJECTDIR}/GPIO.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/utilidades.o.d ${OBJECTDIR}/LCD.o.d ${OBJECTDIR}/oscilator.o.d ${OBJECTDIR}/UART2_RS232.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/memoria.o ${OBJECTDIR}/CN.o ${OBJECTDIR}/GPIO.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/utilidades.o ${OBJECTDIR}/LCD.o ${OBJECTDIR}/oscilator.o ${OBJECTDIR}/UART2_RS232.o ${OBJECTDIR}/ADC1.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/memoria.o.d ${OBJECTDIR}/CN.o.d ${OBJECTDIR}/GPIO.o.d ${OBJECTDIR}/timers.o.d ${OBJECTDIR}/utilidades.o.d ${OBJECTDIR}/LCD.o.d ${OBJECTDIR}/oscilator.o.d ${OBJECTDIR}/UART2_RS232.o.d ${OBJECTDIR}/ADC1.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/memoria.o ${OBJECTDIR}/CN.o ${OBJECTDIR}/GPIO.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/utilidades.o ${OBJECTDIR}/LCD.o ${OBJECTDIR}/oscilator.o ${OBJECTDIR}/UART2_RS232.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/memoria.o ${OBJECTDIR}/CN.o ${OBJECTDIR}/GPIO.o ${OBJECTDIR}/timers.o ${OBJECTDIR}/utilidades.o ${OBJECTDIR}/LCD.o ${OBJECTDIR}/oscilator.o ${OBJECTDIR}/UART2_RS232.o ${OBJECTDIR}/ADC1.o
 
 # Source Files
-SOURCEFILES=main.c memoria.c CN.c GPIO.c timers.c utilidades.c LCD.c oscilator.c UART2_RS232.c
+SOURCEFILES=main.c memoria.c CN.c GPIO.c timers.c utilidades.c LCD.c oscilator.c UART2_RS232.c ADC1.c
 
 
 CFLAGS=
@@ -157,6 +157,13 @@ ${OBJECTDIR}/UART2_RS232.o: UART2_RS232.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE)  UART2_RS232.c  -o ${OBJECTDIR}/UART2_RS232.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UART2_RS232.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"C:/Program Files (x86)/Microchip/xc16/v1.36/support/PIC24H/h" -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/UART2_RS232.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
+${OBJECTDIR}/ADC1.o: ADC1.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ADC1.o.d 
+	@${RM} ${OBJECTDIR}/ADC1.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ADC1.c  -o ${OBJECTDIR}/ADC1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ADC1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_REAL_ICE=1    -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"C:/Program Files (x86)/Microchip/xc16/v1.36/support/PIC24H/h" -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/ADC1.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
 else
 ${OBJECTDIR}/main.o: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -220,6 +227,13 @@ ${OBJECTDIR}/UART2_RS232.o: UART2_RS232.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/UART2_RS232.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  UART2_RS232.c  -o ${OBJECTDIR}/UART2_RS232.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/UART2_RS232.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"C:/Program Files (x86)/Microchip/xc16/v1.36/support/PIC24H/h" -O0 -msmart-io=1 -Wall -msfr-warn=off  
 	@${FIXDEPS} "${OBJECTDIR}/UART2_RS232.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
+	
+${OBJECTDIR}/ADC1.o: ADC1.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/ADC1.o.d 
+	@${RM} ${OBJECTDIR}/ADC1.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  ADC1.c  -o ${OBJECTDIR}/ADC1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MMD -MF "${OBJECTDIR}/ADC1.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -I"C:/Program Files (x86)/Microchip/xc16/v1.36/support/PIC24H/h" -O0 -msmart-io=1 -Wall -msfr-warn=off  
+	@${FIXDEPS} "${OBJECTDIR}/ADC1.o.d" $(SILENT)  -rsi ${MP_CC_DIR}../ 
 	
 endif
 

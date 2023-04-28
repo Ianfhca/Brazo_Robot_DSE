@@ -6,4 +6,5 @@ timers.h  \
 commons.h  \
  LCD.h  \
 memoria.h  \
+UART2_RS232.h  \
 utilidades.h 
