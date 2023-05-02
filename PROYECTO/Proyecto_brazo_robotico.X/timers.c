@@ -2,6 +2,19 @@
 #include "commons.h"
 #include "memoria.h"
 
+void inic_Timer3() {
+    TMR3 = 0; // Inicializar el registro de cuenta
+    PR3 = 40000;
+
+    T3CONbits.TCKPS = 0; // escala del prescaler 1:1
+    T3CONbits.TCS = 0; // reloj interno
+    T3CONbits.TGATE = 0; // Deshabilitar el modo Gate
+
+    T3CONbits.TON = 1; // puesta en marcha del timer
+
+    IEC0bits.T3IE = 0;
+}
+
 void inic_Timer7() {
     TMR7 = 0; // Inicializar el registro de cuenta
     PR7 = 50000;

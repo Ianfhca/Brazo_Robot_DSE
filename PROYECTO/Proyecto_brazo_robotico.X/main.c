@@ -15,6 +15,7 @@
 #include "memoria.h"
 #include "UART2_RS232.h"
 #include "utilidades.h"
+#include "ADC1.h"
 
 int main(void) {
     
@@ -45,10 +46,12 @@ int main(void) {
     
     inic_CN(); // Inicializacion de las interrupciones para los pulsadores.
     
-    inic_UART2();
-    U2TXREG = 0;
+    inic_UART2(); // Inicializacion de la UART
+    U2TXREG = 0; // Bit nulo para comenzar la comunicacion
     
+    inic_Timer3();
     inic_ADC1();
+    
     
     while(1){
         crono();     
@@ -61,11 +64,15 @@ int main(void) {
         else if(flagScroll==1){
             scrollLCD(1);
             flagScroll = -1;
-        }
-            
-            
-        if(indice==3 || indice==4)
+        }   
+        if(indice > 1)
             actualizarLCD();
+        
+        if (flag_muestras == 1) { // Completada la recoleccion de 8 muestras de 
+            //cada dispositivo
+            calcular_media_muestras(); 
+            flag_muestras = 0;
+        }
     }
     
     return 0;

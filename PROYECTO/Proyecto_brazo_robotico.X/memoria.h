@@ -9,3 +9,4 @@ extern int flagScroll;
 
 // funciones
 void scrollLCD(int accion);
+void actualizarLCD();

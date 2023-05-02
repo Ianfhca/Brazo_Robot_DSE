@@ -1,7 +1,7 @@
 // Constantes y variables
 extern int flag_muestras;
-extern unsigned int tabla_pot[8];
-extern unsigned int tabla_temp[8];
+extern unsigned int tabla_Pot[8];
+extern unsigned int tabla_Temp[8];
 extern unsigned int tabla_Px[8];
 extern unsigned int tabla_Py[8];
 extern unsigned int tabla_Palanca[8];

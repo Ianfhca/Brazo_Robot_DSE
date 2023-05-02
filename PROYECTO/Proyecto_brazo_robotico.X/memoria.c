@@ -47,8 +47,7 @@ void scrollLCD(int accion){
             Ventana_LCD[1][k] = pantalla[indice][k];
         }
         indice--;
-    }
-        
+    }   
 }
 
 void actualizarLCD(){
@@ -58,5 +57,4 @@ void actualizarLCD(){
         Ventana_LCD[0][k] = pantalla[indice-1][k];
         Ventana_LCD[1][k] = pantalla[indice][k];
     }
-    
 }

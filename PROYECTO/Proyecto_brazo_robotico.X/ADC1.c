@@ -4,17 +4,15 @@
  *
  * Created on 28 de abril de 2023, 15:07
  */
-
-// Funciones para el modulo ADC1
 #include <p24HJ256GP610A.h>
 #include "LCD.h"
 #include "memoria.h"
 #include "utilidades.h"
 #include "ADC1.h"
 #include "commons.h"
+//#include "OCPWM.h"
 
-void inic_ADC1 (void)
-{
+void inic_ADC1 (void) {
 // Inicializacion registro control AD1CON1
 AD1CON1 = 0;       // todos los campos a 0
 
@@ -23,7 +21,7 @@ AD1CON1 = 0;       // todos los campos a 0
 
 // Comienzo digitalizacion automatico
 // 111=Auto-convert / 010=TMR3 ADC1 y TMR5 ADC2 / 001=INT0 / 000= SAMP 
-AD1CON1bits.SSRC = 7; // Valor 2 para sincronizar con el timer 3 		
+AD1CON1bits.SSRC = 2; // Valor 2 para sincronizar con el timer 3 		
 
 // Muestreo simultaneo o secuencial
 //AD1CON1bits.SIMSAM = 0; 
@@ -54,7 +52,7 @@ AD1CHS123 = 0;	//seleccion del canal 1,2 eta 3
 
 // Inicializacion registro AD1CHS0
 AD1CHS0 = 0;
-AD1CHS0bits.CH0SA = 5; // elige la entrada analogica conectada, 5: potenciometro
+AD1CHS0bits.CH0SA = 5; // Elige la entrada analogica conectada, 5: potenciometro
 
 //AD1CHS0bits.CH0SB = 0;
 
@@ -77,17 +75,22 @@ AD1PCFGLbits.PCFG2 = 0; //Palanca
 
 // Bits y campos relacionados con las interrupciones
 IFS0bits.AD1IF = 0;    
-IEC0bits.AD1IE = 0;    
+IEC0bits.AD1IE = 1;    
 //IPC3bits.AD1IP=xx; // Registro para controlar la prioridad    
 
 //AD1CON
 AD1CON1bits.ADON = 1;  // Habilitar el modulo ADC
 }
 
+void _ISR_NO_PSV _ADC1Interrupt() {
+// Interrumpe el ADC y se recoge el valor
+    recoger_valorADC1();
+    IFS0bits.AD1IF = 0;
+}
+
 unsigned long num_interrupt = 0;
 // Funcion que recoge el valor del adc cada milisegundo, se llama en la rutina de atencion de T3
-void recoger_valorADC1 ()
-{   
+void recoger_valorADC1 () {   
      static unsigned int numMuestras = 0;
     
     switch(AD1CHS0bits.CH0SA) {   
@@ -106,12 +109,12 @@ void recoger_valorADC1 ()
             break;
         
             case 4:
-                tabla_temp[numMuestras] = ADC1BUF0;
+                tabla_Temp[numMuestras] = ADC1BUF0;
                 AD1CHS0bits.CH0SA = 5; // elige el potenciometro
                 break;
             
             case 5:
-                tabla_pot[numMuestras] = ADC1BUF0;
+                tabla_Pot[numMuestras] = ADC1BUF0;
                 numMuestras++;
                 AD1CHS0bits.CH0SA = 0; // elige el sensor de temperatura
                 break;
@@ -129,28 +132,39 @@ void recoger_valorADC1 ()
 //Variables de arrays para almacenar las muestras y flags
 int flag_ADC1 = 0;
 int flag_muestras = 0;
-unsigned int tabla_pot[8];
-unsigned int tabla_temp[8];
+unsigned int tabla_Pot[8];
+unsigned int tabla_Temp[8];
 unsigned int tabla_Px[8];
 unsigned int tabla_Py[8];
 unsigned int tabla_Palanca[8];
 
-void calcularMediaMuestras(){
+void calcular_media_muestras(){
    
-    unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, i;
+    unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, mediaMuestrasPx = 0,
+            mediaMuestrasPy = 0, mediaMuestrasPalanca = 0, i;
 
     for(i=0; i<8; i++){
-        mediaMuestrasPot += tabla_pot[i];
-        mediaMuestrasTemp += tabla_Palanca[i];
+        mediaMuestrasPot += tabla_Pot[i];
+        mediaMuestrasTemp += tabla_Temp[i];
+        mediaMuestrasPx += tabla_Px[i];
+        mediaMuestrasPy += tabla_Py[i];
+        mediaMuestrasPalanca += tabla_Palanca[i];
     }
 
     mediaMuestrasPot = mediaMuestrasPot/8;
     mediaMuestrasTemp = mediaMuestrasTemp/8;
-
-    conversion_adc(&Ventana_LCD[0][3],mediaMuestrasPot);
-    conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
+    mediaMuestrasPx = mediaMuestrasPx/8;
+    mediaMuestrasPy = mediaMuestrasPy/8;
+    mediaMuestrasPalanca = mediaMuestrasPalanca/8;
+    
+    conversion_4digitos(&pantalla[4][7], mediaMuestrasPot);
+    conversion_4digitos(&pantalla[5][7], mediaMuestrasTemp);
+    conversion_4digitos(&pantalla[7][4], mediaMuestrasPx);
+    conversion_4digitos(&pantalla[8][4], mediaMuestrasPy);
+    conversion_4digitos(&pantalla[9][4], mediaMuestrasPalanca);
+    //conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
+    
+        
 
     AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
-    comienzo_muestreo();
-    flag_muestras = 0;
 }
