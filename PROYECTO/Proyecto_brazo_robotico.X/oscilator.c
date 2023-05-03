@@ -20,7 +20,7 @@
 // Reloj a 80 MHz para que las instrucciones se ejecuten a 40 MHz.
 // Fosc= Fin*M(N1*N2),  Fcy=Fosc/2
 // Fosc= 8*40/(2*2)= 80MHz for 8MHz input clock
-void inic_oscilator () {
+void inic_oscilator() {
 	PLLFBD = 40-2;			    // M=PLLFBD+2
 	CLKDIVbits.PLLPOST = 0;		// N2=(PLLPOST+1)*2
 	CLKDIVbits.PLLPRE = 0;		// N1=PLLPRE+2
