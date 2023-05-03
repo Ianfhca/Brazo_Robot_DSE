@@ -1,8 +1,11 @@
 /*
-Funciones de inicializacion y tratamiento de pulsadores y leds
-*/
+ * Fichero: GPIO.c
+ * Autores: Luis Castillo e Ian Fernandez
+ * Descripcion: Inicializacion y tratamiento de pulsadores y leds
+ * 
+ */
 
-
+// Definiciones necesarias
 #include "p24HJ256GP610A.h"
 #include "commons.h"
 
