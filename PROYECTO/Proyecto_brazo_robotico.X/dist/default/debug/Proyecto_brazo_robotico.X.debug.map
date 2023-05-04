@@ -4,11 +4,11 @@ Tool Name:
   c:\program files (x86)\microchip\xc16\v1.36\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000045ac.00 \
-  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000045ac.01 \
-  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000045ac.02 \
-  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000045ac.03 \
-  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000045ac.04 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000037a8.00 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000037a8.01 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000037a8.02 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000037a8.03 \
+  -TC:\\Users\\Ian\\AppData\\Local\\Temp\\tmp000037a8.04 \
   -p24HJ256GP610A \
   -o \
   dist/default/debug/Proyecto_brazo_robotico.X.debug.elf \
@@ -81,9 +81,9 @@ section                    address   length (PC units)   length (bytes) (dec)
 .const                       0x4c0                 0x4             0x6  (6)
 .text                        0x4c4               0x49a           0x6e7  (1767)
 .dinit                       0x95e               0x118           0x1a4  (420)
-.text                        0xa76               0x40e           0x615  (1557)
+.text                        0xa76               0x412           0x61b  (1563)
 
-                 Total "program" memory used (bytes):         0x12c6  (4806) 1%
+                 Total "program" memory used (bytes):         0x12cc  (4812) 1%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x4000]
@@ -161,8 +161,8 @@ External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x00023c                  __psv_init
-                  0x000252                  __data_init
                   0x000252                  __data_init_standard
+                  0x000252                  __data_init
                   0x0002c8                  __CNInterrupt
                   0x00032a                  __T7Interrupt
                   0x00033c                  __T5Interrupt
@@ -196,9 +196,10 @@ External Symbols in Program Memory (by address):
                   0x000d5e                  _main
                   0x000dd4                  _inic_oscilator
                   0x000e26                  _inic_leds
-                  0x000e3e                  _inic_pulsadores
-                  0x000e4e                  _inic_UART2
-                  0x000e72                  _inic_CN
+                  0x000e3a                  _inic_pulsadores
+                  0x000e4a                  _inic_servos
+                  0x000e52                  _inic_UART2
+                  0x000e76                  _inic_CN
 
 External Symbols in Program Memory (by name):
 
@@ -224,16 +225,17 @@ External Symbols in Program Memory (by name):
                   0x000b7a                  _conversion_tiempo
                   0x000554                  _crono
                   0x00078e                  _inic_ADC1
-                  0x000e72                  _inic_CN
+                  0x000e76                  _inic_CN
                   0x000ae4                  _inic_LCD
                   0x0004c4                  _inic_Timer3
                   0x0004fe                  _inic_Timer5
                   0x0004e0                  _inic_Timer7
-                  0x000e4e                  _inic_UART2
+                  0x000e52                  _inic_UART2
                   0x00051c                  _inic_crono
                   0x000e26                  _inic_leds
                   0x000dd4                  _inic_oscilator
-                  0x000e3e                  _inic_pulsadores
+                  0x000e3a                  _inic_pulsadores
+                  0x000e4a                  _inic_servos
                   0x000a76                  _lcd_cmd
                   0x000aac                  _lcd_data
                   0x000b5e                  _line_1
@@ -413,18 +415,18 @@ __FUID3
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x52fa
+.debug_info       0x000000       0x5314
  *(.debug_info)
  .debug_info      0x000000        0x39b build/default/debug/main.o
  .debug_info      0x00039b        0x23a build/default/debug/memoria.o
  .debug_info      0x0005d5        0xb1c build/default/debug/CN.o
- .debug_info      0x0010f1        0x4de build/default/debug/GPIO.o
- .debug_info      0x0015cf       0x11f4 build/default/debug/timers.o
- .debug_info      0x0027c3        0x252 build/default/debug/utilidades.o
- .debug_info      0x002a15        0x8b3 build/default/debug/LCD.o
- .debug_info      0x0032c8        0x627 build/default/debug/oscilator.o
- .debug_info      0x0038ef        0xb88 build/default/debug/UART2_RS232.o
- .debug_info      0x004477        0xe83 build/default/debug/ADC1.o
+ .debug_info      0x0010f1        0x4f8 build/default/debug/GPIO.o
+ .debug_info      0x0015e9       0x11f4 build/default/debug/timers.o
+ .debug_info      0x0027dd        0x252 build/default/debug/utilidades.o
+ .debug_info      0x002a2f        0x8b3 build/default/debug/LCD.o
+ .debug_info      0x0032e2        0x627 build/default/debug/oscilator.o
+ .debug_info      0x003909        0xb88 build/default/debug/UART2_RS232.o
+ .debug_info      0x004491        0xe83 build/default/debug/ADC1.o
  *(.gnu.linkonce.wi.*)
 
 .debug_abbrev     0x000000        0x9aa
@@ -440,31 +442,31 @@ __FUID3
  .debug_abbrev    0x00073b        0x10a build/default/debug/UART2_RS232.o
  .debug_abbrev    0x000845        0x165 build/default/debug/ADC1.o
 
-.debug_line       0x000000        0xa3e
+.debug_line       0x000000        0xa3f
  *(.debug_line)
  .debug_line      0x000000        0x123 build/default/debug/main.o
  .debug_line      0x000123         0x5e build/default/debug/memoria.o
  .debug_line      0x000181        0x114 build/default/debug/CN.o
- .debug_line      0x000295         0xf3 build/default/debug/GPIO.o
- .debug_line      0x000388        0x196 build/default/debug/timers.o
- .debug_line      0x00051e         0x5c build/default/debug/utilidades.o
- .debug_line      0x00057a        0x133 build/default/debug/LCD.o
- .debug_line      0x0006ad         0xf5 build/default/debug/oscilator.o
- .debug_line      0x0007a2        0x13e build/default/debug/UART2_RS232.o
- .debug_line      0x0008e0        0x15e build/default/debug/ADC1.o
+ .debug_line      0x000295         0xf4 build/default/debug/GPIO.o
+ .debug_line      0x000389        0x196 build/default/debug/timers.o
+ .debug_line      0x00051f         0x5c build/default/debug/utilidades.o
+ .debug_line      0x00057b        0x133 build/default/debug/LCD.o
+ .debug_line      0x0006ae         0xf5 build/default/debug/oscilator.o
+ .debug_line      0x0007a3        0x13e build/default/debug/UART2_RS232.o
+ .debug_line      0x0008e1        0x15e build/default/debug/ADC1.o
 
-.debug_frame      0x000000        0x52a
+.debug_frame      0x000000        0x546
  *(.debug_frame)
  .debug_frame     0x000000         0x30 build/default/debug/main.o
  .debug_frame     0x000030         0x4c build/default/debug/memoria.o
  .debug_frame     0x00007c         0x70 build/default/debug/CN.o
- .debug_frame     0x0000ec         0x4c build/default/debug/GPIO.o
- .debug_frame     0x000138        0x158 build/default/debug/timers.o
- .debug_frame     0x000290         0x68 build/default/debug/utilidades.o
- .debug_frame     0x0002f8         0xbc build/default/debug/LCD.o
- .debug_frame     0x0003b4         0x30 build/default/debug/oscilator.o
- .debug_frame     0x0003e4         0x9e build/default/debug/UART2_RS232.o
- .debug_frame     0x000482         0xa8 build/default/debug/ADC1.o
+ .debug_frame     0x0000ec         0x68 build/default/debug/GPIO.o
+ .debug_frame     0x000154        0x158 build/default/debug/timers.o
+ .debug_frame     0x0002ac         0x68 build/default/debug/utilidades.o
+ .debug_frame     0x000314         0xbc build/default/debug/LCD.o
+ .debug_frame     0x0003d0         0x30 build/default/debug/oscilator.o
+ .debug_frame     0x000400         0x9e build/default/debug/UART2_RS232.o
+ .debug_frame     0x00049e         0xa8 build/default/debug/ADC1.o
 
 .debug_str        0x000000        0x2d0
  *(.debug_str)
@@ -486,7 +488,7 @@ __FUID3
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x3de
+                  0x000000        0x3ee
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0x1b build/default/debug/main.o
@@ -495,19 +497,19 @@ __FUID3
  .debug_pubnames
                   0x000084         0x2f build/default/debug/CN.o
  .debug_pubnames
-                  0x0000b3         0x34 build/default/debug/GPIO.o
+                  0x0000b3         0x44 build/default/debug/GPIO.o
  .debug_pubnames
-                  0x0000e7         0xe6 build/default/debug/timers.o
+                  0x0000f7         0xe6 build/default/debug/timers.o
  .debug_pubnames
-                  0x0001cd         0x6a build/default/debug/utilidades.o
+                  0x0001dd         0x6a build/default/debug/utilidades.o
  .debug_pubnames
-                  0x000237         0x5b build/default/debug/LCD.o
+                  0x000247         0x5b build/default/debug/LCD.o
  .debug_pubnames
-                  0x000292         0x25 build/default/debug/oscilator.o
+                  0x0002a2         0x25 build/default/debug/oscilator.o
  .debug_pubnames
-                  0x0002b7         0x47 build/default/debug/UART2_RS232.o
+                  0x0002c7         0x47 build/default/debug/UART2_RS232.o
  .debug_pubnames
-                  0x0002fe         0xe0 build/default/debug/ADC1.o
+                  0x00030e         0xe0 build/default/debug/ADC1.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -1847,7 +1849,7 @@ __c30_signature
 .dinit            0x00095e        0x118
  .dinit           0x00095e        0x118 data_init
 
-.text             0x000a76        0x40e
+.text             0x000a76        0x412
  .text            0x000a76        0x104 build/default/debug/LCD.o
                   0x000a76                  _lcd_cmd
                   0x000aac                  _lcd_data
@@ -1866,10 +1868,11 @@ __c30_signature
                   0x000d5e                  _main
  .text            0x000dd4         0x52 build/default/debug/oscilator.o
                   0x000dd4                  _inic_oscilator
- .text            0x000e26         0x28 build/default/debug/GPIO.o
+ .text            0x000e26         0x2c build/default/debug/GPIO.o
                   0x000e26                  _inic_leds
-                  0x000e3e                  _inic_pulsadores
- .text            0x000e4e         0x24 build/default/debug/UART2_RS232.o
-                  0x000e4e                  _inic_UART2
- .text            0x000e72         0x12 build/default/debug/CN.o
-                  0x000e72                  _inic_CN
+                  0x000e3a                  _inic_pulsadores
+                  0x000e4a                  _inic_servos
+ .text            0x000e52         0x24 build/default/debug/UART2_RS232.o
+                  0x000e52                  _inic_UART2
+ .text            0x000e76         0x12 build/default/debug/CN.o
+                  0x000e76                  _inic_CN

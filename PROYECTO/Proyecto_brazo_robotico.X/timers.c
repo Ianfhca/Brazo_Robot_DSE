@@ -2,18 +2,7 @@
 #include "commons.h"
 #include "memoria.h"
 
-void inic_Timer3() {
-    TMR3 = 0; // Inicializar el registro de cuenta
-    PR3 = 40000;
 
-    T3CONbits.TCKPS = 0; // escala del prescaler 1:1
-    T3CONbits.TCS = 0; // reloj interno
-    T3CONbits.TGATE = 0; // Deshabilitar el modo Gate
-
-    T3CONbits.TON = 1; // puesta en marcha del timer
-
-    IEC0bits.T3IE = 0;
-}
 
 void inic_Timer7() {
     TMR7 = 0; // Inicializar el registro de cuenta
@@ -39,6 +28,33 @@ void inic_Timer5() {
     T5CONbits.TON = 1; // puesta en marcha del timer
 
     IEC1bits.T5IE = 1;
+}
+
+void inic_Timer3() {
+    TMR3 = 0; // Inicializar el registro de cuenta
+    PR3 = 40000;
+
+    T3CONbits.TCKPS = 0; // escala del prescaler 1:1
+    T3CONbits.TCS = 0; // reloj interno
+    T3CONbits.TGATE = 0; // Deshabilitar el modo Gate
+
+    T3CONbits.TON = 1; // puesta en marcha del timer
+
+    IEC0bits.T3IE = 0;
+}
+
+void inic_Timer2() {
+    TMR2 = 0; // Inicializar el registro de cuenta
+    PR2 = PR20ms;
+
+    T2CONbits.TCKPS = 2; // escala del prescaler 1:64
+    T2CONbits.TCS = 0; // reloj interno
+    T2CONbits.TGATE = 0; // Deshabilitar el modo Gate
+
+    T2CONbits.TON = 1; // puesta en marcha del timer
+
+    IEC0bits.T2IE = 1;
+    IFS0bits.T2IF = 0;
 }
 
 unsigned int mili, deci, seg, min;
@@ -131,6 +147,54 @@ void _ISR_NO_PSV _T5Interrupt() {
     IFS1bits.T5IF = 0;
 }
 
+void _ISR_NO_PSV _T2Interrupt() {
+    static int i = 0, aux = PR20ms; 
+
+    switch (i) {
+        case 0:
+            PR2 = DUTY[i];
+            LATDbits.LATD0 = 1;
+            
+            i++;
+            break;
+        case 1:
+            PR2 = DUTY[i];
+            LATDbits.LATD0 = 0;
+            //LATDbits.LATD0 = 1; Servo 2
+            aux = aux - PR2;
+            i++;
+            
+            break;
+        case 5:
+            PR2 = -PR2;
+            LATDbits.LATD0 = 0;
+            estado = 0;
+            break;
+    }
+    IFS0bits.T2IF = 0;
+    
+}
+
+void conmutar_servos(int i) {
+    switch(i) {
+        case 0:
+            //Apagar el ultimo
+            LATDbits.LATD0 = 1;
+            break;
+        case 1:
+
+            break;
+        case 2:
+            
+            break;
+        case 3:
+
+            break;
+        case 4:
+            //Encender last servo
+            break;
+    }
+}
 
 void Delay_ms(int milisegundos) {
     TMR9 = 0; // Inicializar el registro de cuenta

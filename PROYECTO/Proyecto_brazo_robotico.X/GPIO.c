@@ -23,4 +23,8 @@ void inic_pulsadores(){
     TRISDbits.TRISD6 = 1; // Pulsador S3
     TRISAbits.TRISA7 = 1; // Pulsador S5 (Cambia de modo)
 }
+
+void inic_servos() {
+    TRISDbits.TRISD0 = 0; // Servomotor
+}
       
