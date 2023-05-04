@@ -22,6 +22,7 @@ int main(void) {
     inic_oscilator();  // Inicializacion del reloj del sistema: 80 MHz
 	inic_leds();	   // Inicializacion de los leds
     inic_pulsadores(); // Inicializacion de pulsadores
+    inic_servos();     // Inicializacion de los servomotores
     inic_LCD();        // Inicializacion de la pantalla LCD
     
     // Establecimiento de los valores iniciales de la ventana LCD
@@ -45,6 +46,8 @@ int main(void) {
     U2TXREG = 0;      // Bit nulo para comenzar la comunicacion
     inic_Timer3();    // Inicializacion de T3 con periodo de 1ms
     inic_ADC1();      // Inicializacion del ADC1
+    mostrar_duty();   // Muestra los 5 DUTYs por pantalla
+    //inic_Timer2();
     
     // BUCLE PRINCIPAL DEL PROGRAMA
     while(1){

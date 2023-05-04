@@ -1,7 +1,9 @@
 #include "p24HJ256GP610A.h"
 #include "commons.h"
 #include "memoria.h"
-
+#include "utilidades.h"
+#include "PWM.h"
+#include "LCD.h"
 
 
 void inic_Timer7() {
@@ -148,52 +150,54 @@ void _ISR_NO_PSV _T5Interrupt() {
 }
 
 void _ISR_NO_PSV _T2Interrupt() {
-    static int i = 0, aux = PR20ms; 
+    static int servo = 0, aux = PR20ms; 
 
-    switch (i) {
+    switch(servo) {
         case 0:
-            PR2 = DUTY[i];
+            PR2 = DUTY[servo];
             LATDbits.LATD0 = 1;
-            
-            i++;
+            aux = aux - PR2;
+            servo++;
             break;
         case 1:
-            PR2 = DUTY[i];
+            PR2 = DUTY[servo];
             LATDbits.LATD0 = 0;
-            //LATDbits.LATD0 = 1; Servo 2
+            LATDbits.LATD1 = 1;
             aux = aux - PR2;
-            i++;
-            
+            servo++;
+            break;
+        case 2:
+            PR2 = DUTY[servo];
+            LATDbits.LATD1 = 0;
+            LATDbits.LATD2 = 1;
+            aux = aux - PR2;
+            servo++;
+            break;
+        case 3:
+            PR2 = DUTY[servo];
+            LATDbits.LATD2 = 0;
+            LATDbits.LATD3 = 1;
+            aux = aux - PR2;
+            servo++;
+            break;
+        case 4:
+            PR2 = DUTY[servo];
+            LATDbits.LATD3 = 0;
+            LATDbits.LATD4 = 1;
+            aux = aux - PR2;
+            servo++;
             break;
         case 5:
-            PR2 = -PR2;
-            LATDbits.LATD0 = 0;
-            estado = 0;
+            PR2 = aux;
+            LATDbits.LATD4 = 0;
+            servo = 0;
             break;
     }
     IFS0bits.T2IF = 0;
-    
 }
 
 void conmutar_servos(int i) {
-    switch(i) {
-        case 0:
-            //Apagar el ultimo
-            LATDbits.LATD0 = 1;
-            break;
-        case 1:
-
-            break;
-        case 2:
-            
-            break;
-        case 3:
-
-            break;
-        case 4:
-            //Encender last servo
-            break;
-    }
+    
 }
 
 void Delay_ms(int milisegundos) {

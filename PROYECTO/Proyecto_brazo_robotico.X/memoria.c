@@ -3,22 +3,22 @@
 
 
 unsigned char pantalla[FILASPANTALLA][18] = {
-    {"DSE 23 PROYECTO ""\x0D\x0A"},
-    {"Ian F. y Luis C.""\x0D\x0A"},
-    {"===INFO PIC24H==""\x0D\x0A"},
-    {"CRONO: --:--:-- ""\x0D\x0A"},
-    {"POTEN: ----     ""\x0D\x0A"},
-    {"TEMPE: ----     ""\x0D\x0A"},
-    {"====JOYSTICKS===""\x0D\x0A"},
-    {"Px: ----        ""\x0D\x0A"},
-    {"Py: ----        ""\x0D\x0A"},
-    {"PL: ----        ""\x0D\x0A"},
-    {"=====SERVOS=====""\x0D\x0A"},
-    {"Servo 1: ----   ""\x0D\x0A"},
-    {"Servo 2: ----   ""\x0D\x0A"},
-    {"Servo 3: ----   ""\x0D\x0A"},
-    {"Servo 4: ----   ""\x0D\x0A"},
-    {"Servo 5: ----   ""\x0D\x0A"}
+    {"DSE 23 PROYECTO ""\x0D\x0A"}, // 1
+    {"Ian F. y Luis C.""\x0D\x0A"}, // 2
+    {"===INFO PIC24H==""\x0D\x0A"}, // 3
+    {"CRONO: --:--:-- ""\x0D\x0A"}, // 4
+    {"POTEN: ----     ""\x0D\x0A"}, // 5
+    {"TEMPE: ----     ""\x0D\x0A"}, // 6
+    {"====JOYSTICKS===""\x0D\x0A"}, // 7
+    {"Px: ----        ""\x0D\x0A"}, // 8
+    {"Py: ----        ""\x0D\x0A"}, // 9
+    {"PL: ----        ""\x0D\x0A"}, // 10
+    {"=====SERVOS=====""\x0D\x0A"}, // 11
+    {"Servo 1: ----   ""\x0D\x0A"}, // 12
+    {"Servo 2: ----   ""\x0D\x0A"}, // 13
+    {"Servo 3: ----   ""\x0D\x0A"}, // 14
+    {"Servo 4: ----   ""\x0D\x0A"}, // 15
+    {"Servo 5: ----   ""\x0D\x0A"}  // 16
 };
 
 unsigned char Ventana_LCD[2][16] = {

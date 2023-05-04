@@ -13,6 +13,7 @@
       <itemPath>oscilator.h</itemPath>
       <itemPath>UART2_RS232.h</itemPath>
       <itemPath>ADC1.h</itemPath>
+      <itemPath>PWM.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
