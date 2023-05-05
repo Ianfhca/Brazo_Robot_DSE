@@ -183,13 +183,13 @@ void _ISR_NO_PSV _T2Interrupt() {
         case 4:
             PR2 = DUTY[servo];
             LATDbits.LATD3 = 0;
-            LATDbits.LATD4 = 1;
+            LATDbits.LATD8 = 1;
             aux = aux - PR2;
             servo++;
             break;
         case 5:
             PR2 = aux;
-            LATDbits.LATD4 = 0;
+            LATDbits.LATD8 = 0;
             servo = 0;
             break;
     }

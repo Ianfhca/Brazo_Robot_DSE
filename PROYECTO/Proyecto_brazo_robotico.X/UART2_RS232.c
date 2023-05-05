@@ -7,6 +7,7 @@
 #include "UART2_RS232.h"
 #include "timers.h"
 #include "memoria.h"
+#include "PWM.h"
 
 
 
@@ -59,6 +60,27 @@ void _ISR_NO_PSV _U2RXInterrupt() {
         break;
     case 'c':
         T7CONbits.TON = 1;
+        break;
+    case 's':
+        if(DUTY[servoActual]+10<=DUTY_MAX && modo_control==0){
+            DUTY[servoActual]+=10;
+            flag_servo = 1;
+        }
+        break;
+        
+    case 'd':    
+        if(DUTY[servoActual]-10>=DUTY_MIN && modo_control==0){
+            DUTY[servoActual]-=10;
+            flag_servo = 1;
+        }
+        break;    
+    case 'm':
+        modo_control = !modo_control;
+        break;
+        
+    case '1': case '2': case '3': case '4': case '5':
+        servoActual = c - '0';
+        servoActual--;
         break;
     }
 

@@ -7,6 +7,7 @@ extern unsigned int DUTY_MAX;
 extern unsigned int DUTY[5];
 extern unsigned int flag_servo;
 extern unsigned int modo_control;
+extern unsigned int servoActual;
 
 // FUNCIONES
 //=========================================================

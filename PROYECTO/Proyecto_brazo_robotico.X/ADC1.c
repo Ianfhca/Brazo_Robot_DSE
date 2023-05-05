@@ -10,7 +10,7 @@
 #include "utilidades.h"
 #include "ADC1.h"
 #include "commons.h"
-//#include "OCPWM.h"
+#include "PWM.h"
 
 void inic_ADC1 (void) {
 // Inicializacion registro control AD1CON1
@@ -138,10 +138,19 @@ unsigned int tabla_Px[8];
 unsigned int tabla_Py[8];
 unsigned int tabla_Palanca[8];
 
+unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, mediaMuestrasPx = 0,
+            mediaMuestrasPy = 0, mediaMuestrasPalanca = 0;
+
 void calcular_media_muestras(){
    
-    unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, mediaMuestrasPx = 0,
-            mediaMuestrasPy = 0, mediaMuestrasPalanca = 0, i;
+    mediaMuestrasPot = 0;
+    mediaMuestrasTemp = 0; 
+    mediaMuestrasPx = 0;
+    mediaMuestrasPy = 0; 
+    mediaMuestrasPalanca = 0;
+    
+    
+    unsigned int i;
 
     for(i=0; i<8; i++){
         mediaMuestrasPot += tabla_Pot[i];
@@ -167,4 +176,13 @@ void calcular_media_muestras(){
         
 
     AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
+}
+
+void controlarServos(){
+    DUTY[0] = relacion_adc_pwm(mediaMuestrasPx);
+    DUTY[1] = relacion_adc_pwm(mediaMuestrasPy);
+    DUTY[2] = relacion_adc_pwm(mediaMuestrasPalanca);
+    DUTY[3] = relacion_adc_pwm(mediaMuestrasPot);
+    
+    flag_servo = 1;
 }

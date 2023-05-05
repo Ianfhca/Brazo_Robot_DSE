@@ -29,6 +29,6 @@ void inic_servos() {
     TRISDbits.TRISD1 = 0;
     TRISDbits.TRISD2 = 0;
     TRISDbits.TRISD3 = 0;
-    TRISDbits.TRISD4 = 0;
+    TRISDbits.TRISD8 = 0;
 }
       

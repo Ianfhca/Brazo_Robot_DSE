@@ -16,6 +16,7 @@
 #include "UART2_RS232.h"
 #include "utilidades.h"
 #include "ADC1.h"
+#include "PWM.h"
 
 int main(void) {
     // INICIALIZACION PRE-ARRANQUE DEL PROGRAMA
@@ -46,8 +47,9 @@ int main(void) {
     U2TXREG = 0;      // Bit nulo para comenzar la comunicacion
     inic_Timer3();    // Inicializacion de T3 con periodo de 1ms
     inic_ADC1();      // Inicializacion del ADC1
+    inic_servos();
+    inic_Timer2();
     mostrar_duty();   // Muestra los 5 DUTYs por pantalla
-    //inic_Timer2();
     
     // BUCLE PRINCIPAL DEL PROGRAMA
     while(1){
@@ -71,6 +73,14 @@ int main(void) {
             calcular_media_muestras(); 
             flag_muestras = 0;
         }
+        
+        if(flag_servo){
+            mostrar_duty();
+            flag_servo = 0;
+        }
+        
+        if(modo_control)
+            controlarServos();
     }
     
     return 0;
