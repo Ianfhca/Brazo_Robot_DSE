@@ -31,7 +31,7 @@ void inic_Timer5() {
 
     IEC1bits.T5IE = 1;
 }
-
+// Cuenta 1ms
 void inic_Timer3() {
     TMR3 = 0; // Inicializar el registro de cuenta
     PR3 = 40000;
@@ -62,8 +62,8 @@ void inic_Timer2() {
 unsigned int mili, deci, seg, min;
 int flag_inic_crono = 0;
 
-void inic_crono()
 // inicializacion de las variables del cronometro
+void inic_crono()
 {
     mili = 0;
     deci = 0;
@@ -71,7 +71,6 @@ void inic_crono()
     min = 0;
 
     flag_inic_crono = 1;
-
 }
 
 void comprobar_inic_crono() {
@@ -89,27 +88,22 @@ void crono() {
         LATAbits.LATA2 = !LATAbits.LATA2;
         mili = 0;
         deci++;
-
         conversion_tiempo(&pantalla[3][13], deci);
     }
     if (deci == 10) {
         LATAbits.LATA0 = !LATAbits.LATA0;
         deci = 0;
         seg++;
-
         conversion_tiempo(&pantalla[3][10], seg);
     }
     if (seg == 60) {
         seg = 0;
         min++;
-
         conversion_tiempo(&pantalla[3][7], min);
     }
 }
-
-void _ISR_NO_PSV _T7Interrupt()
 // control del tiempo espera 10 ms y luego actualiza
-{
+void _ISR_NO_PSV _T7Interrupt() {
     mili += 10;
     IFS3bits.T7IF = 0;
 }
@@ -123,40 +117,35 @@ void _ISR_NO_PSV _T5Interrupt() {
             lcd_cmd(0x80);
             estado_lcd = 1;
             break;
-
         case 1:
             lcd_data(Ventana_LCD[0][i]);
             i++;
             if (i == 16)
                 estado_lcd = 2;
             break;
-
         case 2:
             i = 0;
             lcd_cmd(0xC0);
             estado_lcd = 3;
             break;
-
         case 3:
             lcd_data(Ventana_LCD[1][i]);
             i++;
             if (i == 16)
                 estado_lcd = 0;
             break;
-
     }
-
     IFS1bits.T5IF = 0;
 }
 
 void _ISR_NO_PSV _T2Interrupt() {
-    static int servo = 0, aux = PR20ms; 
+    static int servo = 0, aux; 
 
     switch(servo) {
         case 0:
             PR2 = DUTY[servo];
             LATDbits.LATD0 = 1;
-            aux = aux - PR2;
+            aux = PR20ms - PR2;
             servo++;
             break;
         case 1:

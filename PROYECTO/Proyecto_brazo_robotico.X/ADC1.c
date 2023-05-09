@@ -98,7 +98,6 @@ void recoger_valorADC1 () {
             tabla_Px[numMuestras] = ADC1BUF0;
             AD1CHS0bits.CH0SA = 1; // elige el Py
             break;
-        
         case 1:
             tabla_Py[numMuestras] = ADC1BUF0;
             AD1CHS0bits.CH0SA = 2; // elige el Py
@@ -107,17 +106,15 @@ void recoger_valorADC1 () {
             tabla_Palanca[numMuestras] = ADC1BUF0;
             AD1CHS0bits.CH0SA = 4; // elige el Py
             break;
-        
-            case 4:
-                tabla_Temp[numMuestras] = ADC1BUF0;
-                AD1CHS0bits.CH0SA = 5; // elige el potenciometro
-                break;
-            
-            case 5:
-                tabla_Pot[numMuestras] = ADC1BUF0;
-                numMuestras++;
-                AD1CHS0bits.CH0SA = 0; // elige el sensor de temperatura
-                break;
+        case 4:
+            tabla_Temp[numMuestras] = ADC1BUF0;
+            AD1CHS0bits.CH0SA = 5; // elige el potenciometro
+            break;
+        case 5:
+            tabla_Pot[numMuestras] = ADC1BUF0;
+            numMuestras++;
+            AD1CHS0bits.CH0SA = 0; // elige el sensor de temperatura
+            break;
         }
          
          if (numMuestras==8){

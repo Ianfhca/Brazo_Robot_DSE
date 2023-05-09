@@ -70,6 +70,8 @@ int main(void) {
         // Tras recoger las 8 muestras de cada dispositivo se realiza la media
         // de los datos recogidos y se actualiza la informacion
         if (flag_muestras == 1) {
+            Nop();
+            Nop();
             calcular_media_muestras(); 
             flag_muestras = 0;
         }

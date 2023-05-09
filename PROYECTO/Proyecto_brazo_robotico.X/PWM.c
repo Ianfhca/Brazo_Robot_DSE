@@ -19,7 +19,7 @@ unsigned int DUTY_MAX = (PR20ms/20) * MAXPWM;	// mediante los "define" PR20ms, M
 unsigned int flag_servo = 0; // flag que indica cuando hay que actualizar la visualizacion de los dutys
 unsigned int modo_control = 0; //Controla el modo de control del pwm: 0-UART, 1-ADC
 //unsigned int DUTY_MIT = (DUTY_MAX + DUTY_MIN)/2; // DUTY_MIT = 812
-unsigned int DUTY[5] = {812, 812, 812, 812, 812};
+unsigned int DUTY[5] = {862, 1191, 1308, 445, 630}; // Valor medio DUTY = 812
 unsigned int servoActual = 0; // Variable que controla que servomotor se esta controlando
 
 void mostrar_duty() {
