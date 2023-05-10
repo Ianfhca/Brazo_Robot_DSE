@@ -1,5 +1,8 @@
 // Variables y funciones exportadas para utilizarlas desde otros modulos
 
+#define MULT 150
+#define VEL 5
+
 // VARIABLES
 //=========================================================
 extern unsigned int DUTY_MIN;

@@ -48,11 +48,10 @@ void _ISR_NO_PSV _CNInterrupt()
         modo_control = 0;
         DUTY[0] = 862;
         DUTY[1] = 1191;
-        DUTY[2] =1308;
+        DUTY[2] =1208;
         DUTY[3] = 445;
         DUTY[4] = 630; 
     }
     
-
 	IFS1bits.CNIF = 0;		
 }

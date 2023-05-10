@@ -138,7 +138,7 @@ unsigned int tabla_Palanca[8];
 unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, mediaMuestrasPx = 0,
             mediaMuestrasPy = 0, mediaMuestrasPalanca = 0;
 
-void calcular_media_muestras(){
+void calcularMediaMuestras(){
    
     mediaMuestrasPot = 0;
     mediaMuestrasTemp = 0; 
@@ -168,16 +168,50 @@ void calcular_media_muestras(){
     conversion_4digitos(&pantalla[7][4], mediaMuestrasPx);
     conversion_4digitos(&pantalla[8][4], mediaMuestrasPy);
     conversion_4digitos(&pantalla[9][4], mediaMuestrasPalanca);
-    //conversion_adc(&Ventana_LCD[0][12],mediaMuestrasTemp);
     
-        
-
     AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
 }
 
 void controlarServos(){
-    DUTY[0] = relacion_adc_pwm(mediaMuestrasPx);
-    DUTY[1] = relacion_adc_pwm(mediaMuestrasPy);
+    static int  minx = MULT, miny = MULT, maxx =0, maxy = 0;
+    
+    // Control de Px
+    if ((mediaMuestrasPx >= 490-DESV && mediaMuestrasPx <= 490+DESV)) {
+        // Rango de no movimiento
+    } else if (mediaMuestrasPx < 490-DESV && DUTY[0] >= DUTY_MIN+VEL){
+        minx--;
+
+    } else if (mediaMuestrasPx > 490+DESV && DUTY[0] <= DUTY_MAX-VEL){
+        maxx++;
+    } 
+    // DECORAR ESTE CODIGO
+    if (maxx >= MULT){
+        maxx = 0;
+        DUTY[0] += VEL;
+    }
+    if (minx <= 0){
+        minx = MULT;
+        DUTY[0] -= VEL;
+    }
+    
+    // Control de Py
+    if (mediaMuestrasPy >= 470-DESV && mediaMuestrasPy <= 470+DESV){
+        // Rango de no movimiento
+    } else if (mediaMuestrasPy < 470-DESV && DUTY[1] >= DUTY_MIN+VEL){
+        miny--;
+    } else if (mediaMuestrasPy > 470+DESV && DUTY[0] <= DUTY_MAX-VEL){
+        maxy++;
+    }
+    // DECORAR ESTE CODIGO
+    if (maxy >= MULT){
+        maxy = 0;
+        DUTY[1] += VEL;
+    }
+    if (miny <= 0){
+        miny = MULT;
+        DUTY[1] -= VEL;
+    }
+    
     DUTY[2] = relacion_adc_pwm(mediaMuestrasPalanca);
     DUTY[3] = relacion_adc_pwm(mediaMuestrasPot);
     
