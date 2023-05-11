@@ -50,6 +50,7 @@ int main(void) {
     inic_servos();
     inic_Timer2();
     mostrar_duty();   // Muestra los 5 DUTYs por pantalla
+    inic_Timer8();
     
     // BUCLE PRINCIPAL DEL PROGRAMA
     while(1){
@@ -82,8 +83,6 @@ int main(void) {
         if(modo_control)
             controlarServos();
         
-        if(flag_objetivo)
-            actualizarDuty();
     }
     
     return 0;

@@ -199,21 +199,21 @@ void controlarServos(){
         // Rango de no movimiento
     } else if (mediaMuestrasPy < 470-DESV && DUTY[1] >= DUTY_MIN+VEL){
         miny--;
-    } else if (mediaMuestrasPy > 470+DESV && DUTY[0] <= DUTY_MAX-VEL){
+    } else if (mediaMuestrasPy > 470+DESV && DUTY[1] <= DUTY_MAX-VEL){
         maxy++;
     }
     // DECORAR ESTE CODIGO
     if (maxy >= MULT){
         maxy = 0;
-        DUTY_OBJETIVO[1] += VEL;
+        DUTY[1] += VEL;
     }
     if (miny <= 0){
         miny = MULT;
-        DUTY_OBJETIVO[1] -= VEL;
+        DUTY[1] -= VEL;
     }
     
-    DUTY_OBJETIVO[2] = relacion_adc_pwm(mediaMuestrasPalanca);
-    DUTY_OBJETIVO[3] = relacion_adc_pwm(mediaMuestrasPot);
+    duty_palanca = relacion_adc_pwm(mediaMuestrasPalanca);
+    DUTY[3] = relacion_adc_pwm(mediaMuestrasPot);
     
     flag_servo = 1;
 }

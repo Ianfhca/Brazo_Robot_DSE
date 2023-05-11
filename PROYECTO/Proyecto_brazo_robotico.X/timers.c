@@ -7,7 +7,7 @@
 
 void inic_Timer8(){
     TMR8 = 0; // Inicializar el registro de cuenta
-    PR8 = 62500; // 100 milisegundos con prescaler 1:64
+    PR8 = 12500; // 20 milisegundos con prescaler 1:64
 
     T8CONbits.TCKPS = 2; // escala del prescaler 1:64
     T8CONbits.TCS = 0; // reloj interno
@@ -118,8 +118,26 @@ void crono() {
 }
 
 void _ISR_NO_PSV _T8Interrupt() {
-    flag_objetivo = 1;
-    IFS3bits.T7IF = 0;
+    
+    if(DUTY[2]<duty_palanca && modo_control==1){
+        if(DUTY[2]+10>=duty_palanca){
+            DUTY[2] = duty_palanca;
+        }
+        else{
+            DUTY[2]+=10;
+        }
+    }
+    else if(DUTY[2]>duty_palanca && modo_control==1){
+        if(DUTY[2]-10<=duty_palanca){
+            DUTY[2] = duty_palanca;
+        }
+        else{
+            DUTY[2]-=10;
+        }
+    }
+    
+    
+    IFS3bits.T8IF = 0;
 }
 
 // control del tiempo espera 10 ms y luego actualiza
