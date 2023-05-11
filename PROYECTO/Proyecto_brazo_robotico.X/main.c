@@ -81,6 +81,9 @@ int main(void) {
         
         if(modo_control)
             controlarServos();
+        
+        if(flag_objetivo)
+            actualizarDuty();
     }
     
     return 0;

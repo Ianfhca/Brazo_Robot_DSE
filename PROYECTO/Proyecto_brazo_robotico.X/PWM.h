@@ -8,7 +8,9 @@
 extern unsigned int DUTY_MIN;
 extern unsigned int DUTY_MAX;
 extern unsigned int DUTY[5];
+extern unsigned int DUTY_OBJETIVO[5];
 extern unsigned int flag_servo;
+extern unsigned int flag_objetivo;
 extern unsigned int modo_control;
 extern unsigned int servoActual;
 
@@ -16,3 +18,4 @@ extern unsigned int servoActual;
 //=========================================================
 void mostrar_duty();
 int relacion_adc_pwm(unsigned int valor_adc);
+void actualizarDuty();

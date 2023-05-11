@@ -5,6 +5,18 @@
 #include "PWM.h"
 #include "LCD.h"
 
+void inic_Timer8(){
+    TMR8 = 0; // Inicializar el registro de cuenta
+    PR8 = 62500; // 100 milisegundos con prescaler 1:64
+
+    T8CONbits.TCKPS = 2; // escala del prescaler 1:64
+    T8CONbits.TCS = 0; // reloj interno
+    T8CONbits.TGATE = 0; // Deshabilitar el modo Gate
+
+    T8CONbits.TON = 1; // puesta en marcha del timer
+
+    IEC3bits.T8IE = 1;
+}
 
 void inic_Timer7() {
     TMR7 = 0; // Inicializar el registro de cuenta
@@ -59,6 +71,8 @@ void inic_Timer2() {
     IFS0bits.T2IF = 0;
 }
 
+
+
 unsigned int mili, deci, seg, min;
 int flag_inic_crono = 0;
 
@@ -102,6 +116,12 @@ void crono() {
         conversion_tiempo(&pantalla[3][7], min);
     }
 }
+
+void _ISR_NO_PSV _T8Interrupt() {
+    flag_objetivo = 1;
+    IFS3bits.T7IF = 0;
+}
+
 // control del tiempo espera 10 ms y luego actualiza
 void _ISR_NO_PSV _T7Interrupt() {
     mili += 10;

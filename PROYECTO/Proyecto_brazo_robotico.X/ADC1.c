@@ -205,15 +205,15 @@ void controlarServos(){
     // DECORAR ESTE CODIGO
     if (maxy >= MULT){
         maxy = 0;
-        DUTY[1] += VEL;
+        DUTY_OBJETIVO[1] += VEL;
     }
     if (miny <= 0){
         miny = MULT;
-        DUTY[1] -= VEL;
+        DUTY_OBJETIVO[1] -= VEL;
     }
     
-    DUTY[2] = relacion_adc_pwm(mediaMuestrasPalanca);
-    DUTY[3] = relacion_adc_pwm(mediaMuestrasPot);
+    DUTY_OBJETIVO[2] = relacion_adc_pwm(mediaMuestrasPalanca);
+    DUTY_OBJETIVO[3] = relacion_adc_pwm(mediaMuestrasPot);
     
     flag_servo = 1;
 }
