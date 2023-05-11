@@ -178,10 +178,10 @@ void controlarServos(){
     // Control de Px
     if ((mediaMuestrasPx >= 490-DESV && mediaMuestrasPx <= 490+DESV)) {
         // Rango de no movimiento
-    } else if (mediaMuestrasPx < 490-DESV && DUTY[0] >= DUTY_MIN+VEL){
+    } else if (mediaMuestrasPx < 490-DESV && DUTY[0] >= DUTY_MIN[0]+VEL){
         minx--;
 
-    } else if (mediaMuestrasPx > 490+DESV && DUTY[0] <= DUTY_MAX-VEL){
+    } else if (mediaMuestrasPx > 490+DESV && DUTY[0] <= DUTY_MAX[0]-VEL){
         maxx++;
     } 
     // DECORAR ESTE CODIGO
@@ -197,9 +197,9 @@ void controlarServos(){
     // Control de Py
     if (mediaMuestrasPy >= 470-DESV && mediaMuestrasPy <= 470+DESV){
         // Rango de no movimiento
-    } else if (mediaMuestrasPy < 470-DESV && DUTY[1] >= DUTY_MIN+VEL){
+    } else if (mediaMuestrasPy < 470-DESV && DUTY[1] >= DUTY_MIN[1]+VEL){
         miny--;
-    } else if (mediaMuestrasPy > 470+DESV && DUTY[1] <= DUTY_MAX-VEL){
+    } else if (mediaMuestrasPy > 470+DESV && DUTY[1] <= DUTY_MAX[1]-VEL){
         maxy++;
     }
     // DECORAR ESTE CODIGO
@@ -212,8 +212,8 @@ void controlarServos(){
         DUTY[1] -= VEL;
     }
     
-    duty_palanca = relacion_adc_pwm(mediaMuestrasPalanca);
-    DUTY[3] = relacion_adc_pwm(mediaMuestrasPot);
+    duty_palanca = relacion_adc_pwm(mediaMuestrasPalanca, 2);
+    DUTY[3] = relacion_adc_pwm(mediaMuestrasPot, 3);
     
     flag_servo = 1;
 }

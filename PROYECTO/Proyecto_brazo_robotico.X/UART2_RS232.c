@@ -62,14 +62,16 @@ void _ISR_NO_PSV _U2RXInterrupt() {
         T7CONbits.TON = 1;
         break;
     case 's':
-        if(DUTY[servoActual]+10<=DUTY_MAX && modo_control==0){
+    case 'S':
+        if(DUTY[servoActual]+10<=DUTY_MAX[servoActual] && modo_control==0){
             DUTY[servoActual]+=10;
             flag_servo = 1;
         }
         break;
         
-    case 'd':    
-        if(DUTY[servoActual]-10>=DUTY_MIN && modo_control==0){
+    case 'd':  
+    case 'D':  
+        if(DUTY[servoActual]-10>=DUTY_MIN[servoActual] && modo_control==0){
             DUTY[servoActual]-=10;
             flag_servo = 1;
         }

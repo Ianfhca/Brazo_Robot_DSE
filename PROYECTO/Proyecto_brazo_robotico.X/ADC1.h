@@ -1,5 +1,5 @@
 // Constantes
-#define DESV 75
+#define DESV 100
 
 // Constantes y variables
 extern int flag_muestras;

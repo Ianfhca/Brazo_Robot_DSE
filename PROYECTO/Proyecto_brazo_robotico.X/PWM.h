@@ -5,8 +5,8 @@
 
 // VARIABLES
 //=========================================================
-extern unsigned int DUTY_MIN;
-extern unsigned int DUTY_MAX;
+extern unsigned int DUTY_MIN[5];
+extern unsigned int DUTY_MAX[5];
 extern unsigned int DUTY[5];
 extern unsigned int duty_palanca;
 extern unsigned int flag_servo;
@@ -17,5 +17,5 @@ extern unsigned int servoActual;
 // FUNCIONES
 //=========================================================
 void mostrar_duty();
-int relacion_adc_pwm(unsigned int valor_adc);
+int relacion_adc_pwm(unsigned int valor_adc, int servo);
 void actualizarDuty();

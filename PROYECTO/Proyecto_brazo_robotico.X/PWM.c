@@ -14,8 +14,14 @@ Fecha:
 #include "PWM.h"
 #include "utilidades.h"
 
-unsigned int DUTY_MIN = (PR20ms/20) * MINPWM;	// Valor minimo y maximo de DUTY. Se calculan 
-unsigned int DUTY_MAX = (PR20ms/20) * MAXPWM;	// mediante los "define" PR20ms, MINPWM y MAXPWM
+unsigned int DUTY_MIN[5] = {(PR20ms/20) * MINPWM, (PR20ms/20) * MINPWM, 
+                            (PR20ms/20) * MINPWM, (PR20ms/20) * MINPWM, 
+                            (PR20ms/20) * MINPWM};	// Valor minimo y maximo 
+                            // de DUTY. Se calculan 
+unsigned int DUTY_MAX[5] = {(PR20ms/20) * MAXPWM, (PR20ms/20) * MAXPWM,
+                            (PR20ms/20) * MAXPWM, (PR20ms/20) * MAXPWM,
+                            (PR20ms/20) * MAXPWM};	// Mediante los "define"
+                            // PR20ms, MINPWM y MAXPWM
 unsigned int flag_servo = 0; // flag que indica cuando hay que actualizar la visualizacion de los dutys
 unsigned int flag_objetivo = 0; // flag que indica que hay que acercar el valor actual del duty al valor objetivo
 unsigned int modo_control = 0; //Controla el modo de control del pwm: 0-UART, 1-ADC
@@ -29,6 +35,6 @@ void mostrar_duty() {
         conversion_4digitos(&pantalla[i+11][9], DUTY[i]);
 }
 
-int relacion_adc_pwm(unsigned int valor_adc) {
-    return (valor_adc*((float)(DUTY_MAX - DUTY_MIN)/1023) + DUTY_MIN);    
+int relacion_adc_pwm(unsigned int valor_adc, int servo) {
+    return (valor_adc*((float)(DUTY_MAX[servo] - DUTY_MIN[servo])/1023) + DUTY_MIN[servo]);    
 }
