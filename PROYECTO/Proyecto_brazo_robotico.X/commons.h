@@ -38,7 +38,13 @@
 #define posds 13
 #define posseg 10
 #define posmin 7
-
+// Definicion de variables
+extern int flag_gatillo;
+extern int flag_ini;
+extern int flag_derecho;
+extern int flag_sec;
+extern int flag_grabar;
+extern int flag_grabado;
 // Definicion de las funciones
 void inic_CN();
 

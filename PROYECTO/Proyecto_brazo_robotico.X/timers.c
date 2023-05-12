@@ -118,6 +118,7 @@ void crono() {
 }
 
 void _ISR_NO_PSV _T8Interrupt() {
+    static int ini[5] = {0, 0, 0, 0, 0};
     
     if(DUTY[2]<duty_palanca && modo_control==1){
         if(DUTY[2]+10>=duty_palanca){
@@ -136,6 +137,144 @@ void _ISR_NO_PSV _T8Interrupt() {
         }
     }
     
+    if (flag_gatillo == 1)
+    {
+        if(DUTY[4]+10 < DUTY_MAX[4]){
+            DUTY[4] += 10;
+        }
+        else{
+            DUTY[4] = DUTY_MAX[4];
+        }
+    }
+    
+    if (flag_derecho == 1)
+    {
+        if(DUTY[4]-10 > DUTY_MIN[4]){
+            DUTY[4] -= 10;
+        }
+        else{
+            DUTY[4] = DUTY_MIN[4];
+        }
+    }
+            
+    
+    if (flag_ini == 1) {
+        if (DUTY[0]+5 < D1)
+            DUTY[0] += 5;
+        else if (DUTY[0]-5 > D1)
+            DUTY[0] -= 5;
+        else {
+            DUTY[0] = D1;
+            ini[0] = 1;
+        }
+        
+        if (DUTY[1]+5 < D2)
+            DUTY[1] += 5;
+        else if (DUTY[1]-5 > D2)
+            DUTY[1] -= 5;
+        else {
+            DUTY[1] = D2;
+            ini[1] = 1;
+        }
+        
+        if (DUTY[2]+5 < D3)
+            DUTY[2] += 5;
+        else if (DUTY[2]-5 > D3)
+            DUTY[2] -= 5;
+        else {
+            DUTY[2] = D3;
+            ini[2] = 1;
+        }
+        
+        if (DUTY[3]+5 < D4)
+            DUTY[3] += 5;
+        else if (DUTY[3]-5 > D4)
+            DUTY[3] -= 5;
+        else {
+            DUTY[3] = D4;
+            ini[3] = 1;
+        }
+        
+        if (DUTY[4]+5 < D5)
+            DUTY[4] += 5;
+        else if (DUTY[4]-5 > D5)
+            DUTY[4] -= 5;
+        else {
+            DUTY[4] = D5;
+            ini[4] = 1;
+        }
+        
+        if (ini[0] && ini[1] && ini[2] && ini[3] && ini[4]) {
+            ini[0] = 0;
+            ini[1] = 0;
+            ini[2] = 0;
+            ini[3] = 0;
+            ini[4] = 0;
+            
+            flag_ini = 0;
+        }
+    }
+    
+    if (flag_sec == 1 && flag_ini == 0 && flag_grabado==1) {
+        if (DUTY[0]+5 < secuencia[movActual][0])
+            DUTY[0] += 5;
+        else if (DUTY[0]-5 > secuencia[movActual][0])
+            DUTY[0] -= 5;
+        else {
+            DUTY[0] = secuencia[movActual][0];
+            ini[0] = 1;
+        }
+        
+        if (DUTY[1]+5 < secuencia[movActual][1])
+            DUTY[1] += 5;
+        else if (DUTY[1]-5 > secuencia[movActual][1])
+            DUTY[1] -= 5;
+        else {
+            DUTY[1] = secuencia[movActual][1];
+            ini[1] = 1;
+        }
+        
+        if (DUTY[2]+5 < secuencia[movActual][2])
+            DUTY[2] += 5;
+        else if (DUTY[2]-5 > secuencia[movActual][2])
+            DUTY[2] -= 5;
+        else {
+            DUTY[2] = secuencia[movActual][2];
+            ini[2] = 1;
+        }
+        
+        if (DUTY[3]+5 < secuencia[movActual][3])
+            DUTY[3] += 5;
+        else if (DUTY[3]-5 > secuencia[movActual][3])
+            DUTY[3] -= 5;
+        else {
+            DUTY[3] = secuencia[movActual][3];
+            ini[3] = 1;
+        }
+        
+        if (DUTY[4]+5 < secuencia[movActual][4])
+            DUTY[4] += 5;
+        else if (DUTY[4]-5 > secuencia[movActual][4])
+            DUTY[4] -= 5;
+        else {
+            DUTY[4] = secuencia[movActual][4];
+            ini[4] = 1;
+        }
+        
+        if (ini[0] && ini[1] && ini[2] && ini[3] && ini[4]) {
+            ini[0] = 0;
+            ini[1] = 0;
+            ini[2] = 0;
+            ini[3] = 0;
+            ini[4] = 0;
+            
+            movActual++;
+            
+            if (movActual==5){
+                flag_sec = 0;
+            }
+        }
+    }
     
     IFS3bits.T8IF = 0;
 }

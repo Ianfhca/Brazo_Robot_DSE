@@ -9,8 +9,6 @@
 #include "memoria.h"
 #include "PWM.h"
 
-
-
 void inic_UART2 ()
 {
     // Velocidad de transmision
@@ -49,37 +47,90 @@ void inic_UART2 ()
 	Delay_us(T_1BIT_US); 	// Esperar tiempo de 1 bit 
 }
 
+
+int flag_calibracion = 0, flag_grabar = 0, flag_grabado = 0, flag_sec = 0;
 void _ISR_NO_PSV _U2RXInterrupt() {
     char c = U2RXREG;
     switch (c){
-    case 'p':
+    case 'p': case 'P':
         T7CONbits.TON = 0;
         break;
-    case 'i':
+    case 'i': case 'I':
         inic_crono();
         break;
-    case 'c':
+    case 'c': case 'C':
         T7CONbits.TON = 1;
         break;
-    case 's':
-    case 'S':
+    case 's': case 'S':
         if(DUTY[servoActual]+10<=DUTY_MAX[servoActual] && modo_control==0){
             DUTY[servoActual]+=10;
             flag_servo = 1;
         }
         break;
         
-    case 'd':  
-    case 'D':  
+    case 'd': case 'D':  
         if(DUTY[servoActual]-10>=DUTY_MIN[servoActual] && modo_control==0){
             DUTY[servoActual]-=10;
             flag_servo = 1;
         }
         break;    
-    case 'm':
+    case 'm': case 'M':
         modo_control = !modo_control;
         break;
+    
+    case 'q': case 'Q':
+        flag_calibracion = 1;
+        DUTY_MIN[servoActual] = 312;
+        DUTY_MAX[servoActual] = 1312;
+        break;    
+    
+    case 'e': case 'E':
+        if(flag_calibracion){
+            DUTY_MIN[servoActual] = DUTY[servoActual];
+        }
+        break;    
+    
+    case 'r': case 'R':
+        if(flag_calibracion){
+            DUTY_MAX[servoActual] = DUTY[servoActual];
+        }
+        break;
         
+    case 'w': case 'W':
+        flag_calibracion = 0;
+        break;
+    
+    case 'f': case 'F':
+        flag_grabar = 1;
+        movActual = 0;
+    break;
+    
+    case 'g': case 'G':
+        if(flag_grabar){
+            secuencia[movActual][0] = DUTY[0];
+            secuencia[movActual][1] = DUTY[1];
+            secuencia[movActual][2] = DUTY[2];
+            secuencia[movActual][3] = DUTY[3];
+            secuencia[movActual][4] = DUTY[4];
+            
+            movActual++;
+            
+            if(movActual==5){
+                flag_grabar = 0;
+                movActual = 0;
+                flag_grabado = 1;
+                flag_ini = 1;
+                modo_control = 0;
+            }
+        }
+    break;
+    
+    case 'h': case 'H':
+        flag_ini = 1;
+        modo_control = 0;
+        flag_sec = 1;
+    break;
+    
     case '1': case '2': case '3': case '4': case '5':
         servoActual = c - '0';
         servoActual--;

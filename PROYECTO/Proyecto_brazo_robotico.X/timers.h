@@ -4,6 +4,7 @@
 extern unsigned int flag_T6;
 
 // funciones
+void inic_Timer8();
 void inic_Timer7 ();
 void inic_Timer5();
 void inic_Timer3();

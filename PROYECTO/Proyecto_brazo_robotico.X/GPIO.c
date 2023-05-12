@@ -13,7 +13,6 @@ void inic_leds() {
     TRISA = 0xff00;       // Definir como salidas los 8 pines conectados a 
                           // leds: RA7-RA. El resto como entradas: 1 = In; 0 = Out
     LATA=LATA & 0xff00;   // Apagar los leds
-    TRISDbits.TRISD0 = 0; // Servomotor ESTO NO VA AQUI
 }
 
 void inic_pulsadores(){
@@ -22,6 +21,9 @@ void inic_pulsadores(){
     TRISDbits.TRISD13 = 1;// Pulsador S4
     TRISDbits.TRISD6 = 1; // Pulsador S3
     TRISAbits.TRISA7 = 1; // Pulsador S5 (Cambia de modo)
+    TRISDbits.TRISD14 = 1;
+    TRISDbits.TRISD15 = 1;
+    TRISGbits.TRISG8 = 1;
 }
 
 void inic_servos() {

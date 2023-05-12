@@ -81,8 +81,7 @@ int main(void) {
         }
         
         if(modo_control)
-            controlarServos();
-        
+            controlarServos();        
     }
     
     return 0;
