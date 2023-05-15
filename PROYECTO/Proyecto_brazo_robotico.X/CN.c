@@ -1,8 +1,12 @@
 /*
- Funciones relacionadas con el modulo CN: inicializacion del modulo
- y rutina de atencion.
-*/
+ * Fichero: CN.c
+ * Autores: Luis Castillo e Ian Fernandez
+ * Descripcion: Funciones relacionadas con la inicializacion del modulo CN
+ * y su correspondiente rutina de atencion
+ * 
+ */
 
+// Definiciones necesarias
 #include "p24HJ256GP610A.h"
 #include "commons.h"
 #include "timers.h"
@@ -10,8 +14,8 @@
 #include "PWM.h"
 
 int flag_gatillo = 0, flag_ini = 0, flag_derecho = 0;
+
 // Funcion para inicializar el modulo CN
-//==================
 void inic_CN()
 {
   	CNEN1bits.CN15IE = 1;	// interrupcion para el S3
@@ -26,44 +30,49 @@ void inic_CN()
 	IFS1bits.CNIF = 0;      // Puesta a 0 del flag IF del modulo
 }
 
-// RUTINA DE ATENCION A LA INTERRUPCION DE CN
-//==============================
+// Rutina de atencion a las interrupciones de CN (Placa y Joystick)
 void _ISR_NO_PSV _CNInterrupt()
 {
-    if (!PORTDbits.RD6) { // S3 Para el cronómetro y lo pone en marcha
+    // S3 Para el cronómetro y lo pone en marcha
+    if (!PORTDbits.RD6) { 
         T7CONbits.TON = !T7CONbits.TON;
     }
-
-    if (!PORTDbits.RD7) { // S6 Resetea el cronómetro
+    
+    // S6 Resetea el cronómetro
+    if (!PORTDbits.RD7) { 
         inic_crono();
         T7CONbits.TON = 0;
     }
     
-    if (!PORTDbits.RD13){ // S4 scroll hacia abajo
+    // S4 scroll hacia abajo
+    if (!PORTDbits.RD13){ 
         flagScroll = 1;
     }
     
-    if (!PORTAbits.RA7){  // S5 scroll hacia arriba
+    // S5 scroll hacia arriba
+    if (!PORTAbits.RA7){  
         flagScroll = 0;
     }
     
-    if (!PORTDbits.RD15) {
+    // Boton central Joystick devuelve el brazo a su posicion de inicio
+    if (!PORTDbits.RD15) {  
         flag_ini = 1;
         modo_control = 0;
     }
     
-    if (!PORTDbits.RD14 && modo_control == 1) {
+    // Gatillo del Joystick cierra la pinza
+    if (!PORTDbits.RD14 && modo_control == 1) {  
         flag_gatillo = 1;
     } else {
         flag_gatillo = 0;
     }
     
+    // Boton lateral del Joystick abre la pinza
     if (!PORTGbits.RG8 && modo_control == 1) {
         flag_derecho = 1;
     } else {
         flag_derecho = 0;
     }
-    
     
 	IFS1bits.CNIF = 0;		
 }

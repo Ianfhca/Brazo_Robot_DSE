@@ -1,7 +1,7 @@
 /*
  * Fichero: GPIO.c
  * Autores: Luis Castillo e Ian Fernandez
- * Descripcion: Inicializacion y tratamiento de pulsadores y leds
+ * Descripcion: Inicializacion y tratamiento de pulsadores, leds y servos
  * 
  */
 

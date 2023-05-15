@@ -1,9 +1,12 @@
 /*
- * File:   ADC1.c
- * Author: Ian
- *
- * Created on 28 de abril de 2023, 15:07
+ * Fichero: ADC1.c
+ * Autores: Luis Castillo e Ian Fernandez
+ * Descripcion: Funciones relacionadas con el convertidor de senales
+ * analogicas a digitales (ADC)
+ * 
  */
+
+// Definiciones necesarias
 #include <p24HJ256GP610A.h>
 #include "LCD.h"
 #include "memoria.h"
@@ -12,84 +15,73 @@
 #include "commons.h"
 #include "PWM.h"
 
+// Inicializa los registros necesarios para el correcto funcionamiento del ADC1
 void inic_ADC1 (void) {
 // Inicializacion registro control AD1CON1
-AD1CON1 = 0;       // todos los campos a 0
-
-// Salida de 12 bits o 10 bits
-//AD1CON1bits.AD12B = 0;  
+AD1CON1 = 0;    // Todos los campos a 0
 
 // Comienzo digitalizacion automatico
-// 111=Auto-convert / 010=TMR3 ADC1 y TMR5 ADC2 / 001=INT0 / 000= SAMP 
+// 111 = Auto-convert / 010 = TMR3 ADC1 y TMR5 ADC2 / 001 = INT0 / 000 = SAMP 
 AD1CON1bits.SSRC = 2; // Valor 2 para sincronizar con el timer 3 		
 
-// Muestreo simultaneo o secuencial
-//AD1CON1bits.SIMSAM = 0; 
-             
 // Comienzo muestreo automático o por programa (SAMP=1) 		
 AD1CON1bits.ASAM = 1;
-
-                    
+                
 // Inicializacion registro control AD1CON2
-AD1CON2 = 0;  // todos los campos a 0
-
+AD1CON2 = 0;    // Todos los campos a 0
 
 // Inicializacion registro control AD1CON3
-AD1CON3 = 0;    // todos los campos a 0
-// Reloj con el que funciona el ADC:  0= reloj CPU; 1= RC erlojua 
-//AD1CON3bits.ADRC = 0;  // 
-AD1CON3bits.SAMC = 31;   // Tiempo muestreo = numero de Tad 
-AD1CON3bits.ADCS = 3;   // Relacion entre TAD y Tcy TAD = Tcy(ADCS+1)
+AD1CON3 = 0;    // Todos los campos a 0
 
+// Reloj con el que funciona el ADC:  0 = reloj CPU; 1= RC reloj 
+AD1CON3bits.SAMC = 31;  // Tiempo muestreo = Numero de Tad 
+AD1CON3bits.ADCS = 3;   // Relacion entre TAD y Tcy TAD = Tcy(ADCS+1)
 
 // Inicializacion registro control AD1CON4
 AD1CON4 = 0;
 
-
 // Inicializacion registro AD1CHS123
-AD1CHS123 = 0;	//seleccion del canal 1,2 eta 3
-
+AD1CHS123 = 0;  // Seleccion del canal 1,2 eta 3
 
 // Inicializacion registro AD1CHS0
 AD1CHS0 = 0;
 AD1CHS0bits.CH0SA = 5; // Elige la entrada analogica conectada, 5: potenciometro
 
-//AD1CHS0bits.CH0SB = 0;
-
-
 // Inicializacion registros AD1CSS 
 // Si escaneo secuencial 1, si no 0
-
-AD1CSSH = 0;   // 16-31 
-AD1CSSL = 0;   // 0-15 
+AD1CSSH = 0;    // 16-31 
+AD1CSSL = 0;    // 0-15 
 
 // Inicializacion registros AD1PCFG. Inicialmente todas AN como digitales
 AD1PCFGH = 0xFFFF;      // 1= digital / 0= Analog
 AD1PCFGL = 0xFFFF;      // Puerto B, todos digitales
+
 // Inicializar como analogicas solo las que vayamos a usar
-AD1PCFGLbits.PCFG5 = 0;   // potenciometro anal?gico = 0
-AD1PCFGLbits.PCFG4 = 0;   // sensor temperatura anal?gico = 0
-AD1PCFGLbits.PCFG0 = 0; //Px
-AD1PCFGLbits.PCFG1 = 0; //Py
-AD1PCFGLbits.PCFG2 = 0; //Palanca
+AD1PCFGLbits.PCFG5 = 0; // Potenciometro analogico = 0
+AD1PCFGLbits.PCFG4 = 0; // Sensor temperatura analogico = 0
+AD1PCFGLbits.PCFG0 = 0; // Joystick Px analogico = 0
+AD1PCFGLbits.PCFG1 = 0; // Joystick Py analogico = 0
+AD1PCFGLbits.PCFG2 = 0; // Joystick Palanca analogico = 0
 
 // Bits y campos relacionados con las interrupciones
 IFS0bits.AD1IF = 0;    
-IEC0bits.AD1IE = 1;    
-//IPC3bits.AD1IP=xx; // Registro para controlar la prioridad    
+IEC0bits.AD1IE = 1;  
 
-//AD1CON
+// AD1CON
 AD1CON1bits.ADON = 1;  // Habilitar el modulo ADC
 }
 
+// Rutina de atencion al ADC1
 void _ISR_NO_PSV _ADC1Interrupt() {
-// Interrumpe el ADC y se recoge el valor
+    // El adc interrumpe junto con el timer 2 y se recoge el valor
     recoger_valorADC1();
     IFS0bits.AD1IF = 0;
 }
 
+// Funcion que recoge el valor del adc cada milisegundo, se llama en la 
+// rutina de atencion de T3
 unsigned long num_interrupt = 0;
-// Funcion que recoge el valor del adc cada milisegundo, se llama en la rutina de atencion de T3
+
 void recoger_valorADC1 () {   
      static unsigned int numMuestras = 0;
     
@@ -117,7 +109,7 @@ void recoger_valorADC1 () {
             break;
         }
          
-         if (numMuestras==8){
+         if (numMuestras==8) {
              numMuestras = 0;
              flag_muestras = 1;
              AD1CON1bits.ADON = 0;  //Deshabilita ADC
@@ -214,6 +206,4 @@ void controlarServos(){
     
     duty_palanca = relacion_adc_pwm(mediaMuestrasPalanca, 2);
     DUTY[3] = relacion_adc_pwm(mediaMuestrasPot, 3);
-    
-    //flag_servo = 1;
 }

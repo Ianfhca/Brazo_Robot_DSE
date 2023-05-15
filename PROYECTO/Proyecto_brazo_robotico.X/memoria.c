@@ -1,6 +1,13 @@
+/*
+ * Fichero: memoria.c
+ * Autores: Luis Castillo e Ian Fernandez
+ * Descripcion: Funciones relacionadas con la memoria del LCD
+ * 
+ */
+
+// Definiciones necesarias
 #include "p24HJ256GP610A.h"
 #include "memoria.h"
-
 
 unsigned char pantalla[FILASPANTALLA][18] = {
     {"DSE 23 PROYECTO ""\x0D\x0A"}, // 1
@@ -26,23 +33,21 @@ unsigned char Ventana_LCD[2][16] = {
     {"--- PULSA S3 ---"}
 };
 
+int indice = 1, flagScroll = -1;
 
-int indice = 1, flagScroll=-1;
-
-void scrollLCD(int accion){
-    //Accion define si el scroll es hacia arriba o hacia abajo
+// Funcion para desplazar el texto en el LCD
+void scrollLCD(int accion) {
+    // Accion define si el scroll es hacia arriba o hacia abajo
     static int k = 0;
     
-    if(accion==1 && indice<FILASPANTALLA-1){
-        for(k=0; k<16; k++){
+    if (accion==1 && indice<FILASPANTALLA-1) {
+        for (k=0; k<16; k++) {
             Ventana_LCD[0][k] = pantalla[indice][k];
             Ventana_LCD[1][k] = pantalla[indice+1][k];
         }
         indice++;
-    }
-        
-    else if(accion==0 && indice>0){
-        for(k=0; k<16; k++){
+    } else if (accion==0 && indice>0) {
+        for (k=0; k<16; k++) {
             Ventana_LCD[0][k] = pantalla[indice-1][k];
             Ventana_LCD[1][k] = pantalla[indice][k];
         }
@@ -50,10 +55,11 @@ void scrollLCD(int accion){
     }   
 }
 
-void actualizarLCD(){
+// Visualizar los caracteres introduciddos en Ventana_LCD
+void actualizarLCD() {
     int k = 0;
     
-    for(k=0; k<16; k++){
+    for (k=0; k<16; k++) {
         Ventana_LCD[0][k] = pantalla[indice-1][k];
         Ventana_LCD[1][k] = pantalla[indice][k];
     }

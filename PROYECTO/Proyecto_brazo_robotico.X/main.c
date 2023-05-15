@@ -45,30 +45,32 @@ int main(void) {
     inic_CN();        // Inicializacion de interrupciones para los pulsadores
     inic_UART2();     // Inicializacion de la UART
     U2TXREG = 0;      // Bit nulo para comenzar la comunicacion
-    inic_Timer8();
     inic_Timer3();    // Inicializacion de T3 con periodo de 1ms
     inic_ADC1();      // Inicializacion del ADC1
-    inic_servos();
-    inic_Timer2();
+    inic_servos();    // Inicializacion de los servos
+    inic_Timer2();    // Inicializacion de T2 con periodo de 20ms
     mostrar_duty();   // Muestra los 5 DUTYs por pantalla
-    
+    inic_Timer8();    // Inicializacion de T8 con periodo de 20ms
     
     // BUCLE PRINCIPAL DEL PROGRAMA
     while(1){
         // Se actualiza el cronometro y se comprueba si se para/reinicia
         crono();     
         comprobar_inic_crono();
+        
         // Se controla el scroll de la LCD mediante 2 botones
-        if(flagScroll==0){
+        if(flagScroll == 0){
             scrollLCD(0);
             flagScroll = -1;
-        } else if(flagScroll==1){
+        } else if(flagScroll == 1){
             scrollLCD(1);
             flagScroll = -1;
         }
+        
         // Se actualiza la LCD con frequencia si no esta situada en la cabecera
         if(indice > 1)
             actualizarLCD();
+        
         // Tras recoger las 8 muestras de cada dispositivo se realiza la media
         // de los datos recogidos y se actualiza la informacion
         if (flag_muestras == 1) {
@@ -76,11 +78,13 @@ int main(void) {
             flag_muestras = 0;
         }
         
+        // Tras 20ms se muestra por pantalla el valor de todos los DUTY
         if(flag_servo){
             mostrar_duty();
             flag_servo = 0;
         }
         
+        // Determina si el brazo se controla mediante la UART o el Joystick
         if(modo_control)
             controlarServos();        
     }
