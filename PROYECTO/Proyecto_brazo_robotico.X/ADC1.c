@@ -215,5 +215,5 @@ void controlarServos(){
     duty_palanca = relacion_adc_pwm(mediaMuestrasPalanca, 2);
     DUTY[3] = relacion_adc_pwm(mediaMuestrasPot, 3);
     
-    flag_servo = 1;
+    //flag_servo = 1;
 }

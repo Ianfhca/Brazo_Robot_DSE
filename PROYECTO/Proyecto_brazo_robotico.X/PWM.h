@@ -5,7 +5,8 @@
 #define D4 445
 #define D5 630
 #define MULT 150
-#define VEL 5
+#define VEL 3
+#define NMAXMOV 10
 
 
 // VARIABLES
@@ -20,7 +21,8 @@ extern unsigned int flag_objetivo;
 extern unsigned int modo_control;
 extern unsigned int servoActual;
 extern unsigned int movActual;
-extern unsigned int secuencia[5][5];
+extern unsigned int nMov;
+extern unsigned int secuencia[NMAXMOV][5];
 
 // FUNCIONES
 //=========================================================

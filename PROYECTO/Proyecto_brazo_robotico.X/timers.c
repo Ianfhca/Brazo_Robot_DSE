@@ -270,8 +270,9 @@ void _ISR_NO_PSV _T8Interrupt() {
             
             movActual++;
             
-            if (movActual==5){
+            if (movActual==nMov){
                 flag_sec = 0;
+                movActual = 0;
             }
         }
     }
@@ -359,6 +360,8 @@ void _ISR_NO_PSV _T2Interrupt() {
             servo = 0;
             break;
     }
+    
+    flag_servo = 1;
     IFS0bits.T2IF = 0;
 }
 

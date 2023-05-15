@@ -45,12 +45,13 @@ int main(void) {
     inic_CN();        // Inicializacion de interrupciones para los pulsadores
     inic_UART2();     // Inicializacion de la UART
     U2TXREG = 0;      // Bit nulo para comenzar la comunicacion
+    inic_Timer8();
     inic_Timer3();    // Inicializacion de T3 con periodo de 1ms
     inic_ADC1();      // Inicializacion del ADC1
     inic_servos();
     inic_Timer2();
     mostrar_duty();   // Muestra los 5 DUTYs por pantalla
-    inic_Timer8();
+    
     
     // BUCLE PRINCIPAL DEL PROGRAMA
     while(1){

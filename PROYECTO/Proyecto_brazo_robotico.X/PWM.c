@@ -16,21 +16,22 @@ Fecha:
 
 unsigned int DUTY_MIN[5] = {(PR20ms/20) * MINPWM, (PR20ms/20) * MINPWM, 
                             (PR20ms/20) * MINPWM, (PR20ms/20) * MINPWM, 
-                            712};	// Valor minimo y maximo 
+                            (PR20ms/20) * MINPWM};	// Valor minimo y maximo 
                             // de DUTY. Se calculan 
 unsigned int DUTY_MAX[5] = {(PR20ms/20) * MAXPWM, (PR20ms/20) * MAXPWM,
                             (PR20ms/20) * MAXPWM, (PR20ms/20) * MAXPWM,
-                            1412};	// Mediante los "define"
+                            (PR20ms/20) * MAXPWM};	// Mediante los "define"
                             // PR20ms, MINPWM y MAXPWM
 unsigned int flag_servo = 0; // flag que indica cuando hay que actualizar la visualizacion de los dutys
 unsigned int flag_objetivo = 0; // flag que indica que hay que acercar el valor actual del duty al valor objetivo
 unsigned int modo_control = 0; //Controla el modo de control del pwm: 0-UART, 1-ADC
-unsigned int DUTY[5] = {D1, D2, D3, D4, D5};; // Valor medio DUTY = 812
+unsigned int DUTY[5] = {D1, D2, D3, D4, D5}; // Valor medio DUTY = 812
 unsigned int duty_palanca = 1208;
 unsigned int servoActual = 0; // Variable que controla que servomotor se esta controlando
 
 unsigned int movActual = 0;
-unsigned int secuencia[5][5];
+unsigned int nMov = 0;
+unsigned int secuencia[NMAXMOV][5];
 
 void mostrar_duty() {
     int i;

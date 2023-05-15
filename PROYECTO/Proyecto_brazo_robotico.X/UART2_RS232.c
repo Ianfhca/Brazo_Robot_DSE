@@ -64,14 +64,14 @@ void _ISR_NO_PSV _U2RXInterrupt() {
     case 's': case 'S':
         if(DUTY[servoActual]+10<=DUTY_MAX[servoActual] && modo_control==0){
             DUTY[servoActual]+=10;
-            flag_servo = 1;
+            //flag_servo = 1;
         }
         break;
         
     case 'd': case 'D':  
         if(DUTY[servoActual]-10>=DUTY_MIN[servoActual] && modo_control==0){
             DUTY[servoActual]-=10;
-            flag_servo = 1;
+            //flag_servo = 1;
         }
         break;    
     case 'm': case 'M':
@@ -103,6 +103,7 @@ void _ISR_NO_PSV _U2RXInterrupt() {
     case 'f': case 'F':
         flag_grabar = 1;
         movActual = 0;
+        nMov = 0;
     break;
     
     case 'g': case 'G':
@@ -114,8 +115,9 @@ void _ISR_NO_PSV _U2RXInterrupt() {
             secuencia[movActual][4] = DUTY[4];
             
             movActual++;
+            nMov++;
             
-            if(movActual==5){
+            if(movActual==NMAXMOV){
                 flag_grabar = 0;
                 movActual = 0;
                 flag_grabado = 1;
@@ -125,10 +127,21 @@ void _ISR_NO_PSV _U2RXInterrupt() {
         }
     break;
     
-    case 'h': case 'H':
+    case 'h': case'H':
+        flag_grabar = 0;
+        movActual = 0;
+        flag_grabado = 1;
         flag_ini = 1;
         modo_control = 0;
-        flag_sec = 1;
+        break;
+    
+    case 'j': case 'J':
+        if(flag_sec==0){
+            flag_ini = 1;
+            modo_control = 0;
+            flag_sec = 1;
+        }
+        
     break;
     
     case '1': case '2': case '3': case '4': case '5':
