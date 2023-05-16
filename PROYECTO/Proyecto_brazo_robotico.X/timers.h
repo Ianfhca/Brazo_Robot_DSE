@@ -1,9 +1,7 @@
-// Exporta funciones invocadas en otroos modulos
-
-// Variables
+// Constantes y variables
 extern unsigned int flag_T6;
 
-// funciones
+// Funciones que se llaman desde otros modulos
 void inic_Timer8();
 void inic_Timer7 ();
 void inic_Timer5();
@@ -13,5 +11,5 @@ void cronometro();
 void inic_crono();
 void crono();
 void comprobar_inic_crono();
-void Delay_ms(int milisegundos);
-void Delay_us(int microsegundos);
+void delay_ms(int milisegundos);
+void delay_us(int microsegundos);

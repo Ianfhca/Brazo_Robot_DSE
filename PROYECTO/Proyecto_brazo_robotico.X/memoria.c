@@ -33,10 +33,10 @@ unsigned char Ventana_LCD[2][16] = {
     {"--- PULSA S3 ---"}
 };
 
-int indice = 1, flagScroll = -1;
+int indice = 1, flag_scroll = -1;
 
 // Funcion para desplazar el texto en el LCD
-void scrollLCD(int accion) {
+void scroll_LCD(int accion) {
     // Accion define si el scroll es hacia arriba o hacia abajo
     static int k = 0;
     
@@ -56,7 +56,7 @@ void scrollLCD(int accion) {
 }
 
 // Visualizar los caracteres introduciddos en Ventana_LCD
-void actualizarLCD() {
+void actualizar_LCD() {
     int k = 0;
     
     for (k=0; k<16; k++) {

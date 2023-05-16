@@ -84,10 +84,11 @@ void inic_Timer2() {
     IEC0bits.T2IE = 1;
 }
 
-// Inicializacion de las variables del cronometro
+
 unsigned int mili, deci, seg, min;
 int flag_inic_crono = 0;
 
+// Inicializacion de las variables del cronometro
 void inic_crono()
 {
     mili = 0;
@@ -380,7 +381,7 @@ void _ISR_NO_PSV _T2Interrupt() {
 }
 
 // Realiza una espera de la cantidad de milisegundos pasados por parametro
-void Delay_ms(int milisegundos) {
+void delay_ms(int milisegundos) {
     TMR9 = 0;   // Inicializar el registro de cuenta
     unsigned long ciclos = (unsigned long) 40000 * milisegundos;
     unsigned long max_ciclos = 65536;
@@ -414,7 +415,7 @@ void Delay_ms(int milisegundos) {
 }
 
 // Realiza una espera de la cantidad de microsegundos pasados por parametro
-void Delay_us(int microsegundos) {
+void delay_us(int microsegundos) {
     TMR9 = 0;   // Inicializar el registro de cuenta
     unsigned long ciclos = (unsigned long) 40 * microsegundos;
     unsigned long max_ciclos = 65536;

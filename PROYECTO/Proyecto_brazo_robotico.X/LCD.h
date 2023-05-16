@@ -1,6 +1,4 @@
-
-// Funciones
-	
+// Funciones que se llaman desde otros modulos
 void lcd_cmd(char cmd);	
 void lcd_data(char data);
 void inic_LCD();

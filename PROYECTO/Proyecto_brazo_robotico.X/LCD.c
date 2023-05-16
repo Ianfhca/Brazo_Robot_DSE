@@ -61,7 +61,7 @@ void lcd_data(char data) {
 // 15ms de delay despues de que Vdd llegue a nnVdc antes de proceder
 // No se requiere siempre y esta basado en el sistema Vdd rise rate
 void inic_LCD() {
-  Delay_ms (15);    // Delay de 15ms
+  delay_ms (15);    // Delay de 15ms
   
   // Establecer el estado inicial para los pines de datos y control
   DATA &= 0xFF00;	
@@ -77,24 +77,24 @@ void inic_LCD() {
 
   /* LCD initialization sequence */ 
   lcd_cmd (0x38);	// Funcion set (3 veces)
-  Delay_ms (5);     // Delay de 5ms
+  delay_ms (5);     // Delay de 5ms
   lcd_cmd (0x38);
-  Delay_us (100);   // Delay de 100us
+  delay_us (100);   // Delay de 100us
   lcd_cmd (0x38);
-  Delay_us (40);    // Delay de 40us
+  delay_us (40);    // Delay de 40us
   lcd_cmd (0x38);  
-  Delay_us (40);    // Delay de 40us
+  delay_us (40);    // Delay de 40us
   lcd_cmd (0x0C);   // Desplegar el control, cursor blink off (0x0C)
-  Delay_us (40);    // Delay de 40us
+  delay_us (40);    // Delay de 40us
   lcd_cmd (0x06);	// Establecer entry mode en (0x06)
-  Delay_us (40);    // Delay de 40us
+  delay_us (40);    // Delay de 40us
 }
 
 // Escribe los caracteres pasados por parametro en la LCD
 void puts_lcd(unsigned char *data, unsigned char count) {
   while(count) {
 	 lcd_data(*data++);
-         Delay_us (40); // Delay de 40us
+         delay_us (40); // Delay de 40us
 	 count--;
 	}	
 }
@@ -102,11 +102,11 @@ void puts_lcd(unsigned char *data, unsigned char count) {
 // Posicionarse en la primera linea del LCD
 void line_1() {
     lcd_cmd(0x80);  // Establecer la memoria DDRAM a (@0)
-    Delay_us (40);  // Delay de 40us
+    delay_us (40);  // Delay de 40us
 }
 
 // Posicionarse en la segunda linea del LCD
 void line_2() {
     lcd_cmd(0xC0);   // Establecer la memoria DDRAM a (@40)
-    Delay_us (40);   // Delay de 40us
+    delay_us (40);   // Delay de 40us
 }

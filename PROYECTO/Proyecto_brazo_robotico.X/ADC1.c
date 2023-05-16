@@ -74,7 +74,7 @@ AD1CON1bits.ADON = 1;  // Habilitar el modulo ADC
 // Rutina de atencion al ADC1
 void _ISR_NO_PSV _ADC1Interrupt() {
     // El adc interrumpe junto con el timer 2 y se recoge el valor
-    recoger_valorADC1();
+    recoger_valor_ADC1();
     IFS0bits.AD1IF = 0;
 }
 
@@ -82,7 +82,7 @@ void _ISR_NO_PSV _ADC1Interrupt() {
 // rutina de atencion de T3
 unsigned long num_interrupt = 0;
 
-void recoger_valorADC1 () {   
+void recoger_valor_ADC1 () {   
      static unsigned int numMuestras = 0;
     
     switch(AD1CHS0bits.CH0SA) {   
@@ -118,7 +118,7 @@ void recoger_valorADC1 () {
     num_interrupt++;
 }
 
-//Variables de arrays para almacenar las muestras y flags
+// Variables de arrays para almacenar las muestras y flags
 int flag_ADC1 = 0;
 int flag_muestras = 0;
 unsigned int tabla_Pot[8];
@@ -127,10 +127,12 @@ unsigned int tabla_Px[8];
 unsigned int tabla_Py[8];
 unsigned int tabla_Palanca[8];
 
+// Medias de cada ADC
 unsigned int mediaMuestrasPot = 0, mediaMuestrasTemp = 0, mediaMuestrasPx = 0,
             mediaMuestrasPy = 0, mediaMuestrasPalanca = 0;
 
-void calcularMediaMuestras(){
+// Funcion para calcular la media de todas las muestras recogidas por los ADC
+void calcular_media_muestras(){
    
     mediaMuestrasPot = 0;
     mediaMuestrasTemp = 0; 
@@ -141,7 +143,7 @@ void calcularMediaMuestras(){
     
     unsigned int i;
 
-    for(i=0; i<8; i++){
+    for (i=0; i<8; i++){
         mediaMuestrasPot += tabla_Pot[i];
         mediaMuestrasTemp += tabla_Temp[i];
         mediaMuestrasPx += tabla_Px[i];
@@ -164,7 +166,8 @@ void calcularMediaMuestras(){
     AD1CON1bits.ADON = 1; //Vuelve a habilitar ADC y comienza nuevo muestreo
 }
 
-void controlarServos(){
+// Funcion que controla los distintos servo motores del brazo 
+void controlar_servos(){
     static int  minx = MULT, miny = MULT, maxx =0, maxy = 0;
     
     // Control de Px
@@ -172,11 +175,11 @@ void controlarServos(){
         // Rango de no movimiento
     } else if (mediaMuestrasPx < 490-DESV && DUTY[0] >= DUTY_MIN[0]+VEL){
         minx--;
-
     } else if (mediaMuestrasPx > 490+DESV && DUTY[0] <= DUTY_MAX[0]-VEL){
         maxx++;
     } 
-    // DECORAR ESTE CODIGO
+    
+    // Cada vez que se alcanza maxx o minx se mueve el servo a velocidad VEL
     if (maxx >= MULT){
         maxx = 0;
         DUTY[0] += VEL;
@@ -194,7 +197,7 @@ void controlarServos(){
     } else if (mediaMuestrasPy > 470+DESV && DUTY[1] <= DUTY_MAX[1]-VEL){
         maxy++;
     }
-    // DECORAR ESTE CODIGO
+    // Cada vez que se alcanza maxy o miny se mueve el servo a velocidad VEL
     if (maxy >= MULT){
         maxy = 0;
         DUTY[1] += VEL;

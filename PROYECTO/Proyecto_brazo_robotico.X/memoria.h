@@ -1,12 +1,11 @@
+// Constantes y variables
+#define FILASPANTALLA 16
 
-// constantes y variables
 extern unsigned char pantalla[16][18];
 extern unsigned char Ventana_LCD[2][16];
 extern int indice;
-extern int flagScroll;
+extern int flag_scroll;
 
-#define FILASPANTALLA 16
-
-// funciones
-void scrollLCD(int accion);
-void actualizarLCD();
+// Funciones que se llaman desde otros modulos
+void scroll_LCD(int accion);
+void actualizar_LCD();

@@ -38,7 +38,7 @@ int main(void) {
     }
     
     // INICIALIZACION POST-ARRANQUE DEL PROGRAMA
-    scrollLCD(0);     // Inicializa el scroll de la LCD en la posicion inicial
+    scroll_LCD(0);     // Inicializa el scroll de la LCD en la posicion inicial
     inic_crono();	  // Inicializacion de las variables del cronometro
 	inic_Timer7();	  // Inicializacion de T7 con periodo de 10ms
     inic_Timer5();    // Inicializacion de T5 con periodo de 2.5ms
@@ -59,22 +59,22 @@ int main(void) {
         comprobar_inic_crono();
         
         // Se controla el scroll de la LCD mediante 2 botones
-        if(flagScroll == 0){
-            scrollLCD(0);
-            flagScroll = -1;
-        } else if(flagScroll == 1){
-            scrollLCD(1);
-            flagScroll = -1;
+        if(flag_scroll == 0){
+            scroll_LCD(0);
+            flag_scroll = -1;
+        } else if(flag_scroll == 1){
+            scroll_LCD(1);
+            flag_scroll = -1;
         }
         
         // Se actualiza la LCD con frequencia si no esta situada en la cabecera
         if(indice > 1)
-            actualizarLCD();
+            actualizar_LCD();
         
         // Tras recoger las 8 muestras de cada dispositivo se realiza la media
         // de los datos recogidos y se actualiza la informacion
         if (flag_muestras == 1) {
-            calcularMediaMuestras(); 
+            calcular_media_muestras(); 
             flag_muestras = 0;
         }
         
@@ -86,7 +86,7 @@ int main(void) {
         
         // Determina si el brazo se controla mediante la UART o el Joystick
         if(modo_control)
-            controlarServos();        
+            controlar_servos();        
     }
     
     return 0;

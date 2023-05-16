@@ -1,7 +1,4 @@
-// declaracion de las funciones relacionadas con los pines GPIO
-// que se usan en otros modulos
-
+// Funciones que se llaman desde otros modulos
 void inic_leds();
 void inic_pulsadores();
 void inic_servos();
-

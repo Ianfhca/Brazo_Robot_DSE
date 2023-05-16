@@ -1,4 +1,4 @@
-// Variables y funciones exportadas para utilizarlas desde otros modulos
+// Constantes y variables
 #define D1 862
 #define D2 1191
 #define D3 1208
@@ -8,9 +8,6 @@
 #define VEL 3
 #define NMAXMOV 10
 
-
-// VARIABLES
-//=========================================================
 extern unsigned int DUTY_MIN[5];
 extern unsigned int DUTY_MAX[5];
 extern unsigned int DUTY[5];
@@ -24,8 +21,6 @@ extern unsigned int movActual;
 extern unsigned int nMov;
 extern unsigned int secuencia[NMAXMOV][5];
 
-// FUNCIONES
-//=========================================================
+// Funciones que se llaman desde otros modulos
 void mostrar_duty();
 int relacion_adc_pwm(unsigned int valor_adc, int servo);
-void actualizarDuty();

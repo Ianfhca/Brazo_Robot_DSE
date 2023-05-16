@@ -46,12 +46,12 @@ void _ISR_NO_PSV _CNInterrupt()
     
     // S4 scroll hacia abajo
     if (!PORTDbits.RD13){ 
-        flagScroll = 1;
+        flag_scroll = 1;
     }
     
     // S5 scroll hacia arriba
     if (!PORTAbits.RA7){  
-        flagScroll = 0;
+        flag_scroll = 0;
     }
     
     // Boton central Joystick devuelve el brazo a su posicion de inicio
