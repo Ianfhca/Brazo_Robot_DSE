@@ -1,5 +1,5 @@
 /*
- * Fichero: ADC1.c
+ * Fichero: utilidades.c
  * Autores: Luis Castillo e Ian Fernandez
  * Descripcion: Funciones de utilidad general para las distintas conversiones
  * 
